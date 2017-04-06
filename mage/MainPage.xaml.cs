@@ -33,7 +33,7 @@ namespace mage
         // Luodaan tellut
         private List<Tellu> tellut;
         private Maata maa;
-        private List<Maata>maapalat;
+      
 
         // Tutkitaan mitkä näppäimet ovat painettuina tai päästettyinä
         private bool UpPressed;
@@ -56,7 +56,7 @@ namespace mage
             Maata maa = new Maata();
             Canvas.SetTop(maa, 450);
             Canvas.SetLeft(maa, 00);
-            maapalat.Add(maa);
+           
 
             // Luodaan skappari
             Skappari skappari = new Skappari();
@@ -181,27 +181,6 @@ namespace mage
                     MyCanvas.Children.Remove(magehahmo);
                     // Poistetaan myös listasta tellu
                     tellut.Remove(tellu);
-                    break;
-                }
-
-            }
-            foreach (Maata maa in maapalat)
-            {
-                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
-                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
-                    );
-                Rect FRect = new Rect(                                               // Tellun sijainti ja koko
-                    maa.LocationX, maa.LocationY, maa.ActualWidth, maa.ActualHeight
-                    );
-                // Does objects intersects, törmääkö objektit
-                BRect.Intersect(FRect);
-                if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
-                {
-                    // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
-                    // Poistetaan tellu Canvakselta
-                    MyCanvas.Children.Remove(magehahmo);
-                    // Poistetaan myös listasta tellu
-                    maapalat.Remove(maa);
                     break;
                 }
 
