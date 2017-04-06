@@ -32,6 +32,8 @@ namespace mage
         private Rynkky rynkky;
         // Luodaan tellut
         private List<Tellu> tellut;
+        private Maata maa;
+        private List<Maata>maapalat;
 
         // Tutkitaan mitkä näppäimet ovat painettuina tai päästettyinä
         private bool UpPressed;
@@ -41,8 +43,6 @@ namespace mage
         // Luodaan ajastin timeri
         private DispatcherTimer timer;
 
-
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -50,8 +50,14 @@ namespace mage
             magehahmo = new Magehahmo
             {
                 LocationX = 1000,     // Määritetään magehahmon aloitussijainti
-                LocationY = 100
+                LocationY = 220
             };
+            // Luodaan maa
+            Maata maa = new Maata();
+            Canvas.SetTop(maa, 450);
+            Canvas.SetLeft(maa, 00);
+            maapalat.Add(maa);
+
             // Luodaan skappari
             Skappari skappari = new Skappari();
             Canvas.SetTop(skappari, 400);
@@ -66,18 +72,19 @@ namespace mage
             tellut = new List<Tellu>();
             // Luodaan Tellu1
             Tellu tellu1 = new Tellu();
-            Canvas.SetTop(tellu1, 200);
+            Canvas.SetTop(tellu1, 500);
             Canvas.SetLeft(tellu1, 300);
             tellut.Add(tellu1);
 
             // Luodaan Tellu2
             Tellu tellu2 = new Tellu();
-            Canvas.SetTop(tellu2, 200);
+            Canvas.SetTop(tellu2, 500);
             Canvas.SetLeft(tellu2, 700);
             tellut.Add(tellu2);
 
             // Lisätään magehahmo Canvakselle
             MyCanvas.Children.Add(magehahmo);
+            MyCanvas.Children.Add(maa);
             MyCanvas.Children.Add(skappari);
             MyCanvas.Children.Add(rynkky);
             MyCanvas.Children.Add(tellu1);
@@ -93,9 +100,7 @@ namespace mage
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             timer.Tick += Timer_Tick;
             timer.Start();
-
         }
-
 
         // KeyUp haistelu
         private void CoreWindow_KeyUp(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
@@ -111,7 +116,6 @@ namespace mage
                 case VirtualKey.Right:
                     RightPressed = false;
                     break;
-
             }
         }
         // KeyDown haistelu
@@ -138,15 +142,12 @@ namespace mage
             if (LeftPressed) magehahmo.MoveLeft();
             if (RightPressed) magehahmo.MoveRight();
             if (UpPressed) magehahmo.Jump();
-
             /*
             if (UpPressed && !magehahmo.Jumping) magehahmo.Jump();
             */
 
-
             // magehahmon paikka Canvaksella päivitetään
             magehahmo.SetLocation();
-
 
             // Collision...
             CheckCollision();
@@ -158,7 +159,6 @@ namespace mage
         {
             Frame.Navigate(typeof(Etusivu));
         }
-
 
         private void CheckCollision()
         {
@@ -181,12 +181,32 @@ namespace mage
                     MyCanvas.Children.Remove(magehahmo);
                     // Poistetaan myös listasta tellu
                     tellut.Remove(tellu);
-
-
                     break;
                 }
 
             }
+            foreach (Maata maa in maapalat)
+            {
+                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
+                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                    );
+                Rect FRect = new Rect(                                               // Tellun sijainti ja koko
+                    maa.LocationX, maa.LocationY, maa.ActualWidth, maa.ActualHeight
+                    );
+                // Does objects intersects, törmääkö objektit
+                BRect.Intersect(FRect);
+                if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
+                {
+                    // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
+                    // Poistetaan tellu Canvakselta
+                    MyCanvas.Children.Remove(magehahmo);
+                    // Poistetaan myös listasta tellu
+                    maapalat.Remove(maa);
+                    break;
+                }
+
+            }
+            
         }
 
     }

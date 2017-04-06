@@ -16,7 +16,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom">
             <Canvas.Background>
-                <ImageBrush ImageSource="Assets/tausta.jpg"/>
+                <ImageBrush ImageSource="Assets/taustakuva.png"/>
             </Canvas.Background>
             <Button Content="Takaisin" VerticalAlignment="Top" HorizontalAlignment="Right" 
              Click="Button_Click" Height="48" Width="116" Canvas.Left="73" Canvas.Top="55"/>

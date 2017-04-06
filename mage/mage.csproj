@@ -98,6 +98,9 @@
     <Compile Include="Etusivu.xaml.cs">
       <DependentUpon>Etusivu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Maata.xaml.cs">
+      <DependentUpon>Maata.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Magehahmo.xaml.cs">
       <DependentUpon>Magehahmo.xaml</DependentUpon>
     </Compile>
@@ -126,12 +129,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\etusivu.png" />
+    <Content Include="Assets\maapala.png" />
     <Content Include="Assets\maget_animaatioon.png" />
     <Content Include="Assets\ohjeet.png" />
     <Content Include="Assets\rynkky.png" />
     <Content Include="Assets\skappari.png" />
     <Content Include="Assets\tausta.jpg" />
     <Content Include="Assets\taustakuva.jpg" />
+    <Content Include="Assets\taustakuva.png" />
     <Content Include="Assets\tellu.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -148,6 +153,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Etusivu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Maata.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
