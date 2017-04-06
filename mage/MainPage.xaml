@@ -9,5 +9,17 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+        <Canvas
+            x:Name="MyCanvas"
+            Width="1280"
+            Height="720"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom">
+            <Canvas.Background>
+                <ImageBrush ImageSource="Assets/tausta.jpg"/>
+            </Canvas.Background>
+            <Button Content="Takaisin" VerticalAlignment="Top" HorizontalAlignment="Right" 
+             Click="Button_Click" Height="48" Width="116" Canvas.Left="73" Canvas.Top="55"/>
+        </Canvas>
     </Grid>
 </Page>
