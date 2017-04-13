@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -32,7 +33,7 @@ namespace mage
         private Rynkky rynkky;
         // Luodaan tellut
         private List<Tellu> tellut;
-        private Maata maa;
+        private List<Maata> maat;
       
 
         // Tutkitaan mitkä näppäimet ovat painettuina tai päästettyinä
@@ -52,11 +53,23 @@ namespace mage
                 LocationX = 1000,     // Määritetään magehahmon aloitussijainti
                 LocationY = 220
             };
-            // Luodaan maa
-            Maata maa = new Maata();
-            Canvas.SetTop(maa, 450);
-            Canvas.SetLeft(maa, 00);
-           
+
+            maat = new List<Maata>();
+            // Luodaan maa1
+            Maata maa1 = new Maata();       
+            maat.Add(maa1);                 
+            maa1.LocationX = 0; maa1.LocationY = 650;
+            maa1.SetLocation();
+            // maa2
+            Maata maa2 = new Maata();
+            maat.Add(maa2);
+            maa2.LocationX = 100; maa2.LocationY = 625;
+            maa2.SetLocation();
+            // maa3
+            Maata maa3 = new Maata();
+            maat.Add(maa3);
+            maa3.LocationX = 500; maa3.LocationY = 0;
+            maa3.SetLocation();
 
             // Luodaan skappari
             Skappari skappari = new Skappari();
@@ -72,19 +85,25 @@ namespace mage
             tellut = new List<Tellu>();
             // Luodaan Tellu1
             Tellu tellu1 = new Tellu();
-            Canvas.SetTop(tellu1, 500);
-            Canvas.SetLeft(tellu1, 300);
+         // Canvas.SetTop(tellu1, 400);
+         // Canvas.SetLeft(tellu1, 300);
             tellut.Add(tellu1);
+            tellu1.LocationX = 300; tellu1.LocationY = 500;
+            tellu1.SetLocation();
 
             // Luodaan Tellu2
             Tellu tellu2 = new Tellu();
-            Canvas.SetTop(tellu2, 500);
-            Canvas.SetLeft(tellu2, 700);
+         // Canvas.SetTop(tellu2, 300);
+         // Canvas.SetLeft(tellu2, 700);
             tellut.Add(tellu2);
+            tellu2.LocationX = 600; tellu2.LocationY = 500;
+            tellu2.SetLocation();
 
-            // Lisätään magehahmo Canvakselle
+            // Lisätään magehahmo ja muut oliot Canvakselle
             MyCanvas.Children.Add(magehahmo);
-            MyCanvas.Children.Add(maa);
+            MyCanvas.Children.Add(maa1);
+            MyCanvas.Children.Add(maa2);
+            MyCanvas.Children.Add(maa3);
             MyCanvas.Children.Add(skappari);
             MyCanvas.Children.Add(rynkky);
             MyCanvas.Children.Add(tellu1);
@@ -138,7 +157,7 @@ namespace mage
         //Peli luuppi
         private void Timer_Tick(object sender, object e)
         {
-            // Move butterfly if up pressed
+            // Liikutetaan magehahmoa jos painettu näppäimiä 
             if (LeftPressed) magehahmo.MoveLeft();
             if (RightPressed) magehahmo.MoveRight();
             if (UpPressed) magehahmo.Jump();
@@ -151,7 +170,7 @@ namespace mage
 
             // Collision...
             CheckCollision();
-            // LISÄTÄÄN COLLISION MYÖHEMMIN
+           
         }
 
         // BUTTON ETUSIVULLE SIIRTYMISEEN
@@ -162,10 +181,10 @@ namespace mage
 
         private void CheckCollision()
         {
-            // Loop flower list, Käydään läpi kukkalista
+            // Käydään läpi tellulista
             foreach (Tellu tellu in tellut)
             {
-                // Get Rects, katsotaan osuuko mikään kukkalistan kukista perhoseen
+                // Get Rects, katsotaan osuuko mikään tellulistan telluista magehahmoon
                 Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
                     magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
                     );
@@ -176,16 +195,43 @@ namespace mage
                 BRect.Intersect(FRect);
                 if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
                 {
+                    Debug.WriteLine("HIT");
                     // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
                     // Poistetaan tellu Canvakselta
-                    MyCanvas.Children.Remove(magehahmo);
+                    MyCanvas.Children.Remove(tellu);
                     // Poistetaan myös listasta tellu
                     tellut.Remove(tellu);
                     break;
                 }
 
             }
-            
+            // Käydään läpi tellulista
+            foreach (Maata maa in maat)
+            {
+                // Get Rects, katsotaan osuuko mikään tellulistan telluista magehahmoon
+                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
+                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                    );
+                Rect FRect = new Rect(                                               // Tellun sijainti ja koko
+                    maa.LocationX, maa.LocationY, maa.ActualWidth, maa.ActualHeight
+                    );
+                // Does objects intersects, törmääkö objektit
+                BRect.Intersect(FRect);
+                if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
+                {
+                    // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
+                    // Poistetaan tellu Canvakselta
+                   // magehahmo.LocationY = maa.LocationY;
+                    
+                    MyCanvas.Children.Remove(maa);
+                    // Poistetaan myös listasta tellu
+                    maat.Remove(maa);
+                    break;
+                }
+
+            }
+          
+
         }
 
     }

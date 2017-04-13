@@ -24,7 +24,8 @@ namespace mage
         public Tellu()
         {
             this.InitializeComponent();
-            Width = 200; Height = 150;
+            Width = 200; Height = 100;
+       
         }
 
         public void SetLocation()

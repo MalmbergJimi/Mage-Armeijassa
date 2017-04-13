@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300" Width="400">
+    d:DesignHeight="400" Width="250">
 
-    <Rectangle Width="300" Height="400" >
+    <Rectangle Width="250" Height="400" >
         <Rectangle.Fill>
             <ImageBrush 
                 ImageSource="Assets/maget_animaatioon.png"

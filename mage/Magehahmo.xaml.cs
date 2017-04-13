@@ -46,7 +46,7 @@ namespace mage
         public Magehahmo()
         {
             this.InitializeComponent();
-
+            Width = 250; Height = 400;
             // Animate 
             timer = new DispatcherTimer();
             // 125ms,   Aikaväli päivittämiselle (fps)
@@ -76,6 +76,8 @@ namespace mage
             if (speed > MaxSpeed) speed = MaxSpeed;
             // Uusi sijainti
             LocationX = LocationX - speed;
+            SetLocation();
+
         }
 
         public void MoveRight()
@@ -86,6 +88,7 @@ namespace mage
 
             // Uusi sijainti
             LocationX = LocationX + speed;
+            SetLocation();
         }
 
         //public bool Jumping = false;
@@ -97,8 +100,9 @@ namespace mage
             // Mage liikkuu ainoastaan ylöspäin LocationY = LocationY - speed;
             // Magen liikutus sinikäyrällä
             Angle = Angle + 0.1f;
-            if (Angle > 360) { Angle = 0; }
-            LocationY = 300 + Math.Cos(Angle) * 140;
+            if (Angle > 50) { Angle = 0; }
+            LocationY = 80 + Math.Cos(Angle) * 140;
+            SetLocation();
         }
 
         // KÄÄNTYMINEN MIETI TÄMÄ UUSIKSI, ONKO TÄYSIN TURHA?

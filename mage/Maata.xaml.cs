@@ -25,7 +25,7 @@ namespace mage
         public Maata()
         {
             this.InitializeComponent();
-            Width = 1280; Height = 500;
+            Width = 1280; Height = 150;
         }
 
         public void SetLocation()
