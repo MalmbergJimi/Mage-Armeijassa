@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="200"
-    d:DesignWidth="250">    
+    d:DesignWidth="250">
     <Image Source="Assets/Maalaja.png"
-        Width="250" Height="200" Stretch="Fill"/>
+        Width="250" Height="200"/>
 </UserControl>

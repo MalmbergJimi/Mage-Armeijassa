@@ -34,7 +34,7 @@ namespace mage
         private List<Maata> maat;
         private List<Maapala> maapalat;
         private List<Skappari> skapparit;
-      
+
 
         // Tutkitaan mitkä näppäimet ovat painettuina tai päästettyinä
         private bool UpPressed;
@@ -48,16 +48,23 @@ namespace mage
         {
             this.InitializeComponent();
 
+            // Vaihdetaan oletus StartUp mode
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            ApplicationView.PreferredLaunchViewSize = new Size(1280, 720);
+            //disable debugger info
+            App.Current.DebugSettings.EnableFrameRateCounter = true;
+
             magehahmo = new Magehahmo
             {
-                LocationX = 1000,     // Määritetään magehahmon aloitussijainti
-                LocationY = 220
+                LocationX = 0,     // Määritetään magehahmon aloitussijainti
+                LocationY = 220,
+                Jumping = false
             };
             // MAAT LISTA
             maat = new List<Maata>();
             // Luodaan maa1
-            Maata maa1 = new Maata();       
-            maat.Add(maa1);                 
+            Maata maa1 = new Maata();
+            maat.Add(maa1);
             maa1.LocationX = 0; maa1.LocationY = 650;
             maa1.SetLocation();
             // maa2
@@ -65,11 +72,7 @@ namespace mage
             maat.Add(maa2);
             maa2.LocationX = 100; maa2.LocationY = 625;
             maa2.SetLocation();
-            // maa3
-            Maata maa3 = new Maata();
-            maat.Add(maa3);
-            maa3.LocationX = 500; maa3.LocationY = 0;
-            maa3.SetLocation();
+            
 
             // Luodaan MAAPALA!
             //Lista
@@ -82,7 +85,7 @@ namespace mage
             //Palat
             Maapala mpala2 = new Maapala();
             maapalat.Add(mpala2);
-            mpala2.LocationX = 100; mpala2.LocationY = 100;
+            mpala2.LocationX = 900; mpala2.LocationY = 500;
             mpala2.SetLocation();
 
             // Luodaan skapparit lista
@@ -117,7 +120,6 @@ namespace mage
             //MAA
             MyCanvas.Children.Add(maa1);
             MyCanvas.Children.Add(maa2);
-            MyCanvas.Children.Add(maa3);
             //MAAPALAT
             MyCanvas.Children.Add(mpala1);
             MyCanvas.Children.Add(mpala2);
@@ -164,6 +166,7 @@ namespace mage
             {
                 case VirtualKey.Up:
                     UpPressed = true;
+                    magehahmo.Jumping = false;
                     break;
                 case VirtualKey.Left:
                     LeftPressed = true;
@@ -173,7 +176,6 @@ namespace mage
                     break;
             }
         }
-
         //Peli luuppi
         private void Timer_Tick(object sender, object e)
         {
@@ -190,7 +192,7 @@ namespace mage
 
             // Collision...
             CheckCollision();
-           
+
         }
 
         // BUTTON ETUSIVULLE SIIRTYMISEEN
@@ -241,11 +243,38 @@ namespace mage
                 {
                     // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
                     // Poistetaan tellu Canvakselta
-                   // magehahmo.LocationY = maa.LocationY;
-                    
-                    MyCanvas.Children.Remove(maa);
+                    // magehahmo.LocationY = maa.LocationY;
+
+                    // MyCanvas.Children.Remove(maa);
                     // Poistetaan myös listasta tellu
-                    maat.Remove(maa);
+                    // maat.Remove(maa);
+                    break;
+                }
+
+            }
+            // Käydään läpi maapalat lista
+            foreach (Maapala mpala in maapalat)
+            {
+                // Get Rects, katsotaan osuuko mikään tellulistan telluista magehahmoon
+                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
+                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                    );
+                Rect FRect = new Rect(                                               // Tellun sijainti ja koko
+                    mpala.LocationX, mpala.LocationY, mpala.ActualWidth, mpala.ActualHeight
+                    );
+                // Ttörmääkö objektit
+                
+                BRect.Intersect(FRect);
+                if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
+                {
+                    // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
+                    magehahmo.Jumping = false;
+                    Debug.WriteLine(BRect);
+                    magehahmo.LocationY = BRect.Y - magehahmo.Height + 20;
+                    magehahmo.LocationX = BRect.X - magehahmo.Width + 20;
+                    magehahmo.SetLocation();
+                    // Poistetaan myös listasta tellu
+                    // maapalat.Remove(mpala);
                     break;
                 }
 
@@ -265,9 +294,6 @@ namespace mage
                 if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
                 {
                     // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
-                    // Poistetaan tellu Canvakselta
-                    // magehahmo.LocationY = maa.LocationY;
-
                     MyCanvas.Children.Remove(skappari);
                     // Poistetaan myös listasta tellu
                     skapparit.Remove(skappari);

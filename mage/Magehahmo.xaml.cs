@@ -42,6 +42,7 @@ namespace mage
         // magehahmon sijainti Canvaksella
         public double LocationX { get; set; }
         public double LocationY { get; set; }
+        public bool Jumping = true;
 
         public Magehahmo()
         {
@@ -76,33 +77,37 @@ namespace mage
             if (speed > MaxSpeed) speed = MaxSpeed;
             // Uusi sijainti
             LocationX = LocationX - speed;
+            if (LocationX <= -10)   // ESTETÄÄN Magehahmoa poistumasta ruudusta
+            {
+                LocationX = 0;
+            }
             SetLocation();
-
         }
-
         public void MoveRight()
         {
             // Lisää speediä
             speed += Accelerate;
             if (speed > MaxSpeed) speed = MaxSpeed;
-
             // Uusi sijainti
             LocationX = LocationX + speed;
+            if (LocationX >= 1150) // ESTETÄÄN Magehahmoa poistumasta ruudusta
+            {
+                LocationX = 1120;
+            }
             SetLocation();
         }
-
         //public bool Jumping = false;
-
         public void Jump()
         {
-            //Jumping = true;
-
-            // Mage liikkuu ainoastaan ylöspäin LocationY = LocationY - speed;
-            // Magen liikutus sinikäyrällä
-            Angle = Angle + 0.1f;
-            if (Angle > 50) { Angle = 0; }
-            LocationY = 80 + Math.Cos(Angle) * 140;
-            SetLocation();
+            if (Jumping == false)
+            {
+                // Mage liikkuu ainoastaan ylöspäin LocationY = LocationY - speed;
+                // Magen liikutus sinikäyrällä
+                Angle = Angle + 0.1f;
+                if (Angle > 50) { Angle = 0; }
+                LocationY = 80 + Math.Cos(Angle) * 140;
+                SetLocation();
+            }
         }
 
         // KÄÄNTYMINEN MIETI TÄMÄ UUSIKSI, ONKO TÄYSIN TURHA?

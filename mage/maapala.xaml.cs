@@ -22,7 +22,8 @@ namespace mage
         public double LocationX { get; set; }
         public double LocationY { get; set; }
         public Maapala()
-        {            
+        {
+            this.InitializeComponent();
             Width = 250; Height = 200;
         }
         public void SetLocation()
