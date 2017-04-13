@@ -98,6 +98,9 @@
     <Compile Include="Etusivu.xaml.cs">
       <DependentUpon>Etusivu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Maapala.xaml.cs">
+      <DependentUpon>Maapala.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Maata.xaml.cs">
       <DependentUpon>Maata.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\etusivu.png" />
+    <Content Include="Assets\Maalaja.png" />
     <Content Include="Assets\maapala.png" />
     <Content Include="Assets\maget_animaatioon.png" />
     <Content Include="Assets\ohjeet.png" />
@@ -153,6 +157,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Etusivu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Maapala.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

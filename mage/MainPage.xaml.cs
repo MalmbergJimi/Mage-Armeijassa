@@ -27,13 +27,13 @@ namespace mage
     {
         // Luodaan magehahmo
         private Magehahmo magehahmo;
-        //Luodaan Skappari
-        private Skappari skappari;
         //Luodaan Rynkky
         private Rynkky rynkky;
         // Luodaan tellut
         private List<Tellu> tellut;
         private List<Maata> maat;
+        private List<Maapala> maapalat;
+        private List<Skappari> skapparit;
       
 
         // Tutkitaan mitkä näppäimet ovat painettuina tai päästettyinä
@@ -53,7 +53,7 @@ namespace mage
                 LocationX = 1000,     // Määritetään magehahmon aloitussijainti
                 LocationY = 220
             };
-
+            // MAAT LISTA
             maat = new List<Maata>();
             // Luodaan maa1
             Maata maa1 = new Maata();       
@@ -71,10 +71,27 @@ namespace mage
             maa3.LocationX = 500; maa3.LocationY = 0;
             maa3.SetLocation();
 
-            // Luodaan skappari
-            Skappari skappari = new Skappari();
-            Canvas.SetTop(skappari, 400);
-            Canvas.SetLeft(skappari, 200);
+            // Luodaan MAAPALA!
+            //Lista
+            maapalat = new List<Maapala>();
+            //Palat
+            Maapala mpala1 = new Maapala();
+            maapalat.Add(mpala1);
+            mpala1.LocationX = 300; mpala1.LocationY = 500;
+            mpala1.SetLocation();
+            //Palat
+            Maapala mpala2 = new Maapala();
+            maapalat.Add(mpala2);
+            mpala2.LocationX = 100; mpala2.LocationY = 100;
+            mpala2.SetLocation();
+
+            // Luodaan skapparit lista
+            skapparit = new List<Skappari>();
+            // Luodaan skappari            
+            Skappari skappari1 = new Skappari();
+            skapparit.Add(skappari1);
+            skappari1.LocationX = 100; skappari1.LocationY = 100;
+            skappari1.SetLocation();
 
             // Luodaan Rynkky
             Rynkky rynkky = new Rynkky();
@@ -85,29 +102,32 @@ namespace mage
             tellut = new List<Tellu>();
             // Luodaan Tellu1
             Tellu tellu1 = new Tellu();
-         // Canvas.SetTop(tellu1, 400);
-         // Canvas.SetLeft(tellu1, 300);
             tellut.Add(tellu1);
             tellu1.LocationX = 300; tellu1.LocationY = 500;
             tellu1.SetLocation();
 
             // Luodaan Tellu2
             Tellu tellu2 = new Tellu();
-         // Canvas.SetTop(tellu2, 300);
-         // Canvas.SetLeft(tellu2, 700);
             tellut.Add(tellu2);
             tellu2.LocationX = 600; tellu2.LocationY = 500;
             tellu2.SetLocation();
 
             // Lisätään magehahmo ja muut oliot Canvakselle
             MyCanvas.Children.Add(magehahmo);
+            //MAA
             MyCanvas.Children.Add(maa1);
             MyCanvas.Children.Add(maa2);
             MyCanvas.Children.Add(maa3);
-            MyCanvas.Children.Add(skappari);
-            MyCanvas.Children.Add(rynkky);
+            //MAAPALAT
+            MyCanvas.Children.Add(mpala1);
+            MyCanvas.Children.Add(mpala2);
+            //TELLUT
             MyCanvas.Children.Add(tellu1);
             MyCanvas.Children.Add(tellu2);
+            //SKAPPARIT
+            MyCanvas.Children.Add(skappari1);
+            //RYNKKY
+            MyCanvas.Children.Add(rynkky);
 
 
             // Key Listeners,   näppäimien kuuntelua, onko jokin painettuna vai ei?
@@ -205,7 +225,7 @@ namespace mage
                 }
 
             }
-            // Käydään läpi tellulista
+            // Käydään läpi maat lista
             foreach (Maata maa in maat)
             {
                 // Get Rects, katsotaan osuuko mikään tellulistan telluista magehahmoon
@@ -230,7 +250,32 @@ namespace mage
                 }
 
             }
-          
+            // Käydään läpi skapparit lista
+            foreach (Skappari skappari in skapparit)
+            {
+                // Get Rects, katsotaan osuuko mikään tellulistan telluista magehahmoon
+                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
+                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                    );
+                Rect FRect = new Rect(                                               // Tellun sijainti ja koko
+                    skappari.LocationX, skappari.LocationY, skappari.ActualWidth, skappari.ActualHeight
+                    );
+                // Does objects intersects, törmääkö objektit
+                BRect.Intersect(FRect);
+                if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
+                {
+                    // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
+                    // Poistetaan tellu Canvakselta
+                    // magehahmo.LocationY = maa.LocationY;
+
+                    MyCanvas.Children.Remove(skappari);
+                    // Poistetaan myös listasta tellu
+                    skapparit.Remove(skappari);
+                    break;
+                }
+
+            }
+
 
         }
 
