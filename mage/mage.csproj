@@ -126,6 +126,9 @@
     <Compile Include="Tellu.xaml.cs">
       <DependentUpon>Tellu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Voitit.xaml.cs">
+      <DependentUpon>Voitit.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -196,6 +199,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tellu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Voitit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

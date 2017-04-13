@@ -321,7 +321,7 @@ namespace mage
                     MyCanvas.Children.Remove(rynkky);
                     // Poistetaan myös listasta tellu
                     rynkyt.Remove(rynkky);
-                    //     Frame.Navigate(typeof(Voitit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
+                    Frame.Navigate(typeof(Voitit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
                     break;
                 }
 
