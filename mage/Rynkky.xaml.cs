@@ -25,7 +25,7 @@ namespace mage
         public Rynkky()
         {
             this.InitializeComponent();
-            Width = 50; Height = 50;
+            Width = 100; Height = 50;
         }
 
         public void SetLocation()

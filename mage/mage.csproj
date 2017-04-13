@@ -98,6 +98,9 @@
     <Compile Include="Etusivu.xaml.cs">
       <DependentUpon>Etusivu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Havisit.xaml.cs">
+      <DependentUpon>Havisit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Maapala.xaml.cs">
       <DependentUpon>Maapala.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Etusivu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Havisit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

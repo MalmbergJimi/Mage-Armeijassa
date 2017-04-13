@@ -24,7 +24,7 @@ namespace mage
         public Maapala()
         {
             this.InitializeComponent();
-            Width = 250; Height = 200;
+            Width = 150; Height = 100;
         }
         public void SetLocation()
         {

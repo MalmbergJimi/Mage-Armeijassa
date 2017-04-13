@@ -27,13 +27,13 @@ namespace mage
     {
         // Luodaan magehahmo
         private Magehahmo magehahmo;
-        //Luodaan Rynkky
-        private Rynkky rynkky;
         // Luodaan tellut
         private List<Tellu> tellut;
         private List<Maata> maat;
         private List<Maapala> maapalat;
         private List<Skappari> skapparit;
+        //Luodaan Rynkky
+        private List<Rynkky> rynkyt;
 
 
         // Tutkitaan mitkä näppäimet ovat painettuina tai päästettyinä
@@ -80,12 +80,12 @@ namespace mage
             //Palat
             Maapala mpala1 = new Maapala();
             maapalat.Add(mpala1);
-            mpala1.LocationX = 300; mpala1.LocationY = 500;
+            mpala1.LocationX = 300; mpala1.LocationY = 550;
             mpala1.SetLocation();
             //Palat
             Maapala mpala2 = new Maapala();
             maapalat.Add(mpala2);
-            mpala2.LocationX = 900; mpala2.LocationY = 500;
+            mpala2.LocationX = 900; mpala2.LocationY = 550;
             mpala2.SetLocation();
 
             // Luodaan skapparit lista
@@ -96,10 +96,13 @@ namespace mage
             skappari1.LocationX = 100; skappari1.LocationY = 100;
             skappari1.SetLocation();
 
-            // Luodaan Rynkky
-            Rynkky rynkky = new Rynkky();
-            Canvas.SetTop(rynkky, 400);
-            Canvas.SetLeft(rynkky, 1000);
+            // Luodaan Rynkkylista
+            rynkyt = new List<Rynkky>();
+            // Luodaan Rynkky1
+            Rynkky rynkky1 = new Rynkky();
+            rynkyt.Add(rynkky1);
+            rynkky1.LocationX = 800; rynkky1.LocationY = 100;
+            rynkky1.SetLocation();
 
             // alustetaan tellulista
             tellut = new List<Tellu>();
@@ -129,7 +132,7 @@ namespace mage
             //SKAPPARIT
             MyCanvas.Children.Add(skappari1);
             //RYNKKY
-            MyCanvas.Children.Add(rynkky);
+            MyCanvas.Children.Add(rynkky1);
 
 
             // Key Listeners,   näppäimien kuuntelua, onko jokin painettuna vai ei?
@@ -203,7 +206,7 @@ namespace mage
 
         private void CheckCollision()
         {
-            // Käydään läpi tellulista
+            // Käydään läpi TELLU-LISTA
             foreach (Tellu tellu in tellut)
             {
                 // Get Rects, katsotaan osuuko mikään tellulistan telluista magehahmoon
@@ -218,16 +221,16 @@ namespace mage
                 if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
                 {
                     Debug.WriteLine("HIT");
-                    // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
                     // Poistetaan tellu Canvakselta
                     MyCanvas.Children.Remove(tellu);
                     // Poistetaan myös listasta tellu
                     tellut.Remove(tellu);
+               //     Frame.Navigate(typeof(Havisit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
                     break;
                 }
 
             }
-            // Käydään läpi maat lista
+            // Käydään läpi MAAT-lista
             foreach (Maata maa in maat)
             {
                 // Get Rects, katsotaan osuuko mikään tellulistan telluista magehahmoon
@@ -252,10 +255,10 @@ namespace mage
                 }
 
             }
-            // Käydään läpi maapalat lista
+            // Käydään läpi MAAPALAT-lista
             foreach (Maapala mpala in maapalat)
             {
-                // Get Rects, katsotaan osuuko mikään tellulistan telluista magehahmoon
+                // Get Rects, katsotaan osuuko mikään Maapalat-listasta magehahmoon
                 Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
                     magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
                     );
@@ -273,16 +276,15 @@ namespace mage
                     magehahmo.LocationY = BRect.Y - magehahmo.Height + 20;
                     magehahmo.LocationX = BRect.X - magehahmo.Width + 20;
                     magehahmo.SetLocation();
-                    // Poistetaan myös listasta tellu
                     // maapalat.Remove(mpala);
                     break;
                 }
 
             }
-            // Käydään läpi skapparit lista
+            // Käydään läpi SKAPPARIT-lista
             foreach (Skappari skappari in skapparit)
             {
-                // Get Rects, katsotaan osuuko mikään tellulistan telluista magehahmoon
+                // Get Rects, katsotaan osuuko mikään skapparit listasta magehahmoon
                 Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
                     magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
                     );
@@ -295,8 +297,31 @@ namespace mage
                 {
                     // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
                     MyCanvas.Children.Remove(skappari);
-                    // Poistetaan myös listasta tellu
+                    // Poistetaan myös listasta skappari
                     skapparit.Remove(skappari);
+                    break;
+                }
+
+            }
+            // Käydään läpi RYNKYT-lista
+            foreach (Rynkky rynkky in rynkyt)
+            {
+                // Get Rects, katsotaan osuuko mikään tellulistan telluista magehahmoon
+                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
+                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                    );
+                Rect FRect = new Rect(                                               // Tellun sijainti ja koko
+                    rynkky.LocationX, rynkky.LocationY, rynkky.ActualWidth, rynkky.ActualHeight
+                    );
+                // Does objects intersects, törmääkö objektit
+                BRect.Intersect(FRect);
+                if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
+                {
+                    // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
+                    MyCanvas.Children.Remove(rynkky);
+                    // Poistetaan myös listasta tellu
+                    rynkyt.Remove(rynkky);
+                    //     Frame.Navigate(typeof(Voitit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
                     break;
                 }
 
