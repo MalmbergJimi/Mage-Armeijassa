@@ -71,8 +71,7 @@ namespace mage
             Maata maa2 = new Maata();
             maat.Add(maa2);
             maa2.LocationX = 100; maa2.LocationY = 625;
-            maa2.SetLocation();
-            
+            maa2.SetLocation();            
 
             // Luodaan MAAPALA!
             //Lista
@@ -185,9 +184,19 @@ namespace mage
                     break;
                 case VirtualKey.Left:
                     LeftPressed = true;
+                    //Käännetään magehahmo kun kävellään VASEMMALLE
+                    ScaleTransform scaleLeft = new ScaleTransform();
+                    scaleLeft.ScaleX = -1;
+                    scaleLeft.CenterX = 125;
+                    magehahmo.RenderTransform = scaleLeft;
                     break;
                 case VirtualKey.Right:
                     RightPressed = true;
+                    //Käännetään magehahmo kun kävellään OIKEALLE
+                    ScaleTransform scaleRight = new ScaleTransform();
+                    scaleRight.ScaleX = 1;
+                    scaleRight.CenterX = 125;
+                    magehahmo.RenderTransform = scaleRight;
                     break;
             }
         }
@@ -201,28 +210,22 @@ namespace mage
             /*
             if (UpPressed && !magehahmo.Jumping) magehahmo.Jump();
             */
-
             // magehahmon paikka Canvaksella päivitetään
             magehahmo.SetLocation();
-
-            
-
-            // Collision...
+            // Collision, törmääkö mihinkään
             CheckCollision();
-
         }
 
         // BUTTON ETUSIVULLE SIIRTYMISEEN
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Etusivu));
-
-          
+            Frame.Navigate(typeof(Etusivu));         
         }
         
-
         private void CheckCollision()
         {
+
+            
             // Käydään läpi TELLU-LISTA
             foreach (Tellu tellu in tellut)
             {
@@ -245,7 +248,6 @@ namespace mage
                //     Frame.Navigate(typeof(Havisit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
                     break;
                 }
-
             }
             // Käydään läpi MAAT-lista
             foreach (Maata maa in maat)
@@ -265,9 +267,8 @@ namespace mage
                     // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
                     // Poistetaan tellu Canvakselta
                     // magehahmo.LocationY = maa.LocationY;
-
                     // MyCanvas.Children.Remove(maa);
-                    // Poistetaan myös listasta tellu
+                    // Poistetaan myös listasta maa
                     // maat.Remove(maa);
                     break;
                 }
@@ -276,7 +277,6 @@ namespace mage
                     magehahmo.LocationY = magehahmo.LocationY + 10;
                     break;
                 }
-
             }
             // Käydään läpi MAAPALAT-lista
             foreach (Maapala mpala in maapalat)
@@ -304,7 +304,6 @@ namespace mage
                     magehahmo.Jumping = false;
                     break;
                 }
-
             }
             // Käydään läpi SKAPPARIT-lista
             foreach (Skappari skappari in skapparit)
@@ -326,7 +325,6 @@ namespace mage
                     skapparit.Remove(skappari);
                     break;
                 }
-
             }
             // Käydään läpi RYNKYT-lista
             foreach (Rynkky rynkky in rynkyt)
@@ -346,7 +344,7 @@ namespace mage
                     MyCanvas.Children.Remove(rynkky);
                     // Poistetaan myös listasta tellu
                     rynkyt.Remove(rynkky);
-                    //Frame.Navigate(typeof(Voitit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
+                    Frame.Navigate(typeof(Voitit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
                     break;
                 }
 

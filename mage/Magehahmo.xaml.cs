@@ -45,7 +45,7 @@ namespace mage
         public bool Jumping = false;
         public bool Hyppy = false;
         public int Force;
-        public int G = 30;
+        public int G = 50;
         public int laskuri;
 
         public Magehahmo()
