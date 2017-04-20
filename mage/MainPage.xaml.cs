@@ -80,20 +80,30 @@ namespace mage
             //Palat
             Maapala mpala1 = new Maapala();
             maapalat.Add(mpala1);
-            mpala1.LocationX = 300; mpala1.LocationY = 550;
+            mpala1.LocationX = 300; mpala1.LocationY = 590;
             mpala1.SetLocation();
             //Palat
             Maapala mpala2 = new Maapala();
             maapalat.Add(mpala2);
-            mpala2.LocationX = 900; mpala2.LocationY = 550;
+            mpala2.LocationX = 370; mpala2.LocationY = 590;
             mpala2.SetLocation();
+            //Palat
+            Maapala mpala3 = new Maapala();
+            maapalat.Add(mpala3);
+            mpala3.LocationX = 420; mpala3.LocationY = 590;
+            mpala3.SetLocation();
+            //Palat
+            Maapala mpala4 = new Maapala();
+            maapalat.Add(mpala4);
+            mpala4.LocationX = 1090; mpala4.LocationY = 590;
+            mpala4.SetLocation();
 
             // Luodaan skapparit lista
             skapparit = new List<Skappari>();
             // Luodaan skappari            
             Skappari skappari1 = new Skappari();
             skapparit.Add(skappari1);
-            skappari1.LocationX = 100; skappari1.LocationY = 100;
+            skappari1.LocationX = 1000; skappari1.LocationY = 480;
             skappari1.SetLocation();
 
             // Luodaan Rynkkylista
@@ -109,13 +119,13 @@ namespace mage
             // Luodaan Tellu1
             Tellu tellu1 = new Tellu();
             tellut.Add(tellu1);
-            tellu1.LocationX = 300; tellu1.LocationY = 500;
+            tellu1.LocationX = 300; tellu1.LocationY = 610;
             tellu1.SetLocation();
 
             // Luodaan Tellu2
             Tellu tellu2 = new Tellu();
             tellut.Add(tellu2);
-            tellu2.LocationX = 600; tellu2.LocationY = 500;
+            tellu2.LocationX = 600; tellu2.LocationY = 610;
             tellu2.SetLocation();
 
             // Lisätään magehahmo ja muut oliot Canvakselle
@@ -126,6 +136,8 @@ namespace mage
             //MAAPALAT
             MyCanvas.Children.Add(mpala1);
             MyCanvas.Children.Add(mpala2);
+            MyCanvas.Children.Add(mpala3);
+            MyCanvas.Children.Add(mpala4);
             //TELLUT
             MyCanvas.Children.Add(tellu1);
             MyCanvas.Children.Add(tellu2);
@@ -261,7 +273,7 @@ namespace mage
                 }
                 else
                 {
-                    magehahmo.LocationY = magehahmo.LocationY + 15;
+                    magehahmo.LocationY = magehahmo.LocationY + 10;
                     break;
                 }
 
@@ -289,6 +301,7 @@ namespace mage
                     //magehahmo.LocationX = BRect.X;
                     magehahmo.SetLocation();
                     // maapalat.Remove(mpala);
+                    magehahmo.Jumping = false;
                     break;
                 }
 

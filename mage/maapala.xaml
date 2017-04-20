@@ -9,5 +9,5 @@
     d:DesignHeight="100"
     d:DesignWidth="150">
     <Image Source="Assets/Maalaja.png"
-        Width="150" Height="100"/>
+        Width="75" Height="50"/>
 </UserControl>

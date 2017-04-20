@@ -44,6 +44,9 @@ namespace mage
         public double LocationY { get; set; }
         public bool Jumping = false;
         public bool Hyppy = false;
+        public int Force;
+        public int G = 30;
+        public int laskuri;
 
         public Magehahmo()
         {
@@ -68,10 +71,8 @@ namespace mage
             }
             // Set offset
             SpriteSheetOffset.Y = currentFrame * -frameheight;
-
-
+          
         }
-
         // Move -metodi liikkumiseen
         public void MoveLeft()
         {
@@ -84,6 +85,7 @@ namespace mage
             {
                 LocationX = 0;
             }
+            
             SetLocation();
         }
         public void MoveRight()
@@ -102,15 +104,17 @@ namespace mage
         //public bool Jumping = false;
         public void Jump()
         {
+            
             if (Jumping == false)
-            {                
+            {
                 // Mage liikkuu ainoastaan ylöspäin LocationY = LocationY - speed;
                 // Magen liikutus sinikäyrällä
-                Angle = Angle + 0.1f;
-                if (Angle > 50) { Angle = 0; }
-                LocationY = 50 + Math.Cos(Angle) * 140;
-                SetLocation();
+                LocationY = Force;
+                LocationY = LocationY - Force;
                 Jumping = true;
+                /*  Angle = 45;
+                  LocationY = LocationY - (Math.Cos(Angle) * 140);
+                  SetLocation(); */
             }
         }
 

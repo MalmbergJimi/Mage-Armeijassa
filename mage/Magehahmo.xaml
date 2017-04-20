@@ -24,7 +24,7 @@
             <RotateTransform x:Name="MagehahmoRotateAngle"
                              Angle="0"
                              CenterX="75"
-                             CenterY="66"
+                             CenterY="66"                             
                              />
         </Rectangle.RenderTransform>
     </Rectangle>
