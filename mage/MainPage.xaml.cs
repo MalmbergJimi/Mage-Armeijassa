@@ -32,6 +32,7 @@ namespace mage
         private List<Maata> maat;
         private List<Maapala> maapalat;
         private List<Skappari> skapparit;
+        private List<Isomaapala> isotpalat;
         //Luodaan Rynkky
         private List<Rynkky> rynkyt;
 
@@ -94,8 +95,18 @@ namespace mage
             //Palat
             Maapala mpala4 = new Maapala();
             maapalat.Add(mpala4);
-            mpala4.LocationX = 1090; mpala4.LocationY = 590;
+            mpala4.LocationX = 780; mpala4.LocationY = 590;
             mpala4.SetLocation();
+
+            // LUODAAN ISO MAAPALA
+            isotpalat = new List<Isomaapala>();
+
+            //Isotpalat
+            Isomaapala isopala1 = new Isomaapala();
+            isotpalat.Add(isopala1);
+            isopala1.LocationX = 840;
+            isopala1.LocationY = 538;
+            isopala1.SetLocation();
 
             // Luodaan skapparit lista
             skapparit = new List<Skappari>();
@@ -144,6 +155,8 @@ namespace mage
             MyCanvas.Children.Add(skappari1);
             //RYNKKY
             MyCanvas.Children.Add(rynkky1);
+            //ISOT PALAT
+            MyCanvas.Children.Add(isopala1);
 
 
             // Key Listeners,   näppäimien kuuntelua, onko jokin painettuna vai ei?
@@ -305,6 +318,33 @@ namespace mage
                     break;
                 }
             }
+            //Käydään läpi Isotmaapalat lista
+            
+            foreach(Isomaapala isopala in isotpalat)
+            {
+                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
+                   magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                   );
+                Rect FRect = new Rect(                                               // Tellun sijainti ja koko
+                    isopala.LocationX, isopala.LocationY, isopala.ActualWidth, isopala.ActualHeight
+                    );
+
+                BRect.Intersect(FRect);
+                if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
+                {
+                    // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
+                    magehahmo.Jumping = false;
+                    Debug.WriteLine(BRect);
+                    magehahmo.LocationY = 720 - isopala.Height - magehahmo.Height - 50;
+                    // magehahmo.LocationY = BRect.Y - magehahmo.Height + 20;
+                    //magehahmo.LocationX = BRect.X;
+                    magehahmo.SetLocation();
+                    // maapalat.Remove(mpala);
+                    magehahmo.Jumping = false;
+                    break;
+                }
+            }
+  
             // Käydään läpi SKAPPARIT-lista
             foreach (Skappari skappari in skapparit)
             {

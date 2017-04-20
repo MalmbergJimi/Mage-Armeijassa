@@ -101,6 +101,9 @@
     <Compile Include="Havisit.xaml.cs">
       <DependentUpon>Havisit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Isomaapala.xaml.cs">
+      <DependentUpon>Isomaapala.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Maapala.xaml.cs">
       <DependentUpon>Maapala.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Havisit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Isomaapala.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
