@@ -42,7 +42,8 @@ namespace mage
         // magehahmon sijainti Canvaksella
         public double LocationX { get; set; }
         public double LocationY { get; set; }
-        public bool Jumping = true;
+        public bool Jumping = false;
+        public bool Hyppy = false;
 
         public Magehahmo()
         {
@@ -67,6 +68,8 @@ namespace mage
             }
             // Set offset
             SpriteSheetOffset.Y = currentFrame * -frameheight;
+
+
         }
 
         // Move -metodi liikkumiseen
@@ -100,13 +103,14 @@ namespace mage
         public void Jump()
         {
             if (Jumping == false)
-            {
+            {                
                 // Mage liikkuu ainoastaan ylöspäin LocationY = LocationY - speed;
                 // Magen liikutus sinikäyrällä
                 Angle = Angle + 0.1f;
                 if (Angle > 50) { Angle = 0; }
-                LocationY = 80 + Math.Cos(Angle) * 140;
+                LocationY = 50 + Math.Cos(Angle) * 140;
                 SetLocation();
+                Jumping = true;
             }
         }
 

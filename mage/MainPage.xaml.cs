@@ -169,7 +169,7 @@ namespace mage
             {
                 case VirtualKey.Up:
                     UpPressed = true;
-                    magehahmo.Jumping = false;
+                    magehahmo.Jumping = true;
                     break;
                 case VirtualKey.Left:
                     LeftPressed = true;
@@ -193,6 +193,8 @@ namespace mage
             // magehahmon paikka Canvaksella päivitetään
             magehahmo.SetLocation();
 
+            
+
             // Collision...
             CheckCollision();
 
@@ -202,7 +204,10 @@ namespace mage
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Etusivu));
+
+          
         }
+        
 
         private void CheckCollision()
         {
@@ -244,6 +249,7 @@ namespace mage
                 BRect.Intersect(FRect);
                 if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
                 {
+                    magehahmo.Jumping = false;
                     // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
                     // Poistetaan tellu Canvakselta
                     // magehahmo.LocationY = maa.LocationY;
@@ -251,6 +257,11 @@ namespace mage
                     // MyCanvas.Children.Remove(maa);
                     // Poistetaan myös listasta tellu
                     // maat.Remove(maa);
+                    break;
+                }
+                else
+                {
+                    magehahmo.LocationY = magehahmo.LocationY + 15;
                     break;
                 }
 
@@ -262,7 +273,7 @@ namespace mage
                 Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
                     magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
                     );
-                Rect FRect = new Rect(                                               // Tellun sijainti ja koko
+                Rect FRect = new Rect(                                               // Maapalan sijainti ja koko
                     mpala.LocationX, mpala.LocationY, mpala.ActualWidth, mpala.ActualHeight
                     );
                 // Ttörmääkö objektit
@@ -273,8 +284,9 @@ namespace mage
                     // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
                     magehahmo.Jumping = false;
                     Debug.WriteLine(BRect);
-                    magehahmo.LocationY = BRect.Y - magehahmo.Height + 20;
-                    magehahmo.LocationX = BRect.X - magehahmo.Width + 20;
+                    magehahmo.LocationY = 720 - mpala.Height - magehahmo.Height - 50;
+                   // magehahmo.LocationY = BRect.Y - magehahmo.Height + 20;
+                    //magehahmo.LocationX = BRect.X;
                     magehahmo.SetLocation();
                     // maapalat.Remove(mpala);
                     break;
@@ -321,7 +333,7 @@ namespace mage
                     MyCanvas.Children.Remove(rynkky);
                     // Poistetaan myös listasta tellu
                     rynkyt.Remove(rynkky);
-                    Frame.Navigate(typeof(Voitit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
+                    //Frame.Navigate(typeof(Voitit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
                     break;
                 }
 
