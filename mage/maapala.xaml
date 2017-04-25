@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="100"
-    d:DesignWidth="150">
-    <Image Source="Assets/Maalaja.png"
-        Width="75" Height="50"/>
+    d:DesignHeight="50"
+    d:DesignWidth="50">
+    <Image Source="Assets/lumipala_reuna.png"
+        Width="50" Height="50"/>
 </UserControl>

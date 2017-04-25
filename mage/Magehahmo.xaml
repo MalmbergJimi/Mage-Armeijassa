@@ -6,12 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="400" Width="250">
+    d:DesignHeight="96" Width="60">
 
-    <Rectangle Width="250" Height="400" >
+    <Rectangle Width="60" Height="96" >
         <Rectangle.Fill>
             <ImageBrush 
-                ImageSource="Assets/maget_animaatioon.png"
+                ImageSource="Assets/maget_animaatioon_pienempi3.png"
                 Stretch="None"
                 AlignmentX="Left"
                 AlignmentY="Top">
@@ -23,7 +23,7 @@
         <Rectangle.RenderTransform>
             <RotateTransform x:Name="MagehahmoRotateAngle"
                              Angle="0"
-                             CenterX="75"
+                             CenterX="62.5"
                              CenterY="66"                             
                              />
         </Rectangle.RenderTransform>

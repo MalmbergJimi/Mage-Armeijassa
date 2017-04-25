@@ -141,9 +141,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\etusivu.png" />
+    <Content Include="Assets\lumipala.png" />
+    <Content Include="Assets\lumipala_reuna.png" />
     <Content Include="Assets\Maalaja.png" />
     <Content Include="Assets\maapala.png" />
     <Content Include="Assets\maget_animaatioon.png" />
+    <Content Include="Assets\maget_animaatioon_korjattu.png" />
+    <Content Include="Assets\maget_animaatioon_pienempi.png" />
+    <Content Include="Assets\maget_animaatioon_pienempi2.png" />
+    <Content Include="Assets\maget_animaatioon_pienempi3.png" />
     <Content Include="Assets\ohjeet.png" />
     <Content Include="Assets\rynkky.png" />
     <Content Include="Assets\skappari.png" />

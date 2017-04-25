@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignHeight="175"
+    d:DesignWidth="87.5">
 
     <Image Source="Assets/skappari.png"
-         Width="100" Height="200" />
+         Width="87.5" Height="175" />
 </UserControl>

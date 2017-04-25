@@ -24,7 +24,7 @@ namespace mage
         public Skappari()
         {
             this.InitializeComponent();
-            Width = 100; Height = 200;
+            Width = 87.5; Height = 175;
         }
 
         public void SetLocation()

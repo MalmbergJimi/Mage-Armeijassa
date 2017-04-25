@@ -24,7 +24,7 @@ namespace mage
         public Isomaapala()
         {
             this.InitializeComponent();
-            Width = 150; Height = 100;
+            Width = 100; Height = 100;
         }
         public void SetLocation()
         {

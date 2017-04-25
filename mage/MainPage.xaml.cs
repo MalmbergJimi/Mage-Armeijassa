@@ -68,34 +68,29 @@ namespace mage
             maat.Add(maa1);
             maa1.LocationX = 0; maa1.LocationY = 650;
             maa1.SetLocation();
-            // maa2
-            Maata maa2 = new Maata();
-            maat.Add(maa2);
-            maa2.LocationX = 100; maa2.LocationY = 625;
-            maa2.SetLocation();            
-
+            
             // Luodaan MAAPALA!
             //Lista
             maapalat = new List<Maapala>();
             //Palat
             Maapala mpala1 = new Maapala();
             maapalat.Add(mpala1);
-            mpala1.LocationX = 300; mpala1.LocationY = 590;
+            mpala1.LocationX = 100; mpala1.LocationY = 620;
             mpala1.SetLocation();
             //Palat
             Maapala mpala2 = new Maapala();
             maapalat.Add(mpala2);
-            mpala2.LocationX = 370; mpala2.LocationY = 590;
+            mpala2.LocationX = 150; mpala2.LocationY = 620;
             mpala2.SetLocation();
             //Palat
             Maapala mpala3 = new Maapala();
             maapalat.Add(mpala3);
-            mpala3.LocationX = 420; mpala3.LocationY = 590;
+            mpala3.LocationX = 200; mpala3.LocationY = 620;
             mpala3.SetLocation();
             //Palat
             Maapala mpala4 = new Maapala();
             maapalat.Add(mpala4);
-            mpala4.LocationX = 780; mpala4.LocationY = 590;
+            mpala4.LocationX = 550; mpala4.LocationY = 620;
             mpala4.SetLocation();
 
             // LUODAAN ISO MAAPALA
@@ -103,17 +98,24 @@ namespace mage
 
             //Isotpalat
             Isomaapala isopala1 = new Isomaapala();
+            //Isopala1
             isotpalat.Add(isopala1);
-            isopala1.LocationX = 840;
-            isopala1.LocationY = 538;
+            isopala1.LocationX = 200;
+            isopala1.LocationY = 570;
             isopala1.SetLocation();
+            //Isopala2
+            Isomaapala isopala2 = new Isomaapala();
+            isotpalat.Add(isopala2);
+            isopala2.LocationX = 450;
+            isopala2.LocationY = 570;
+            isopala2.SetLocation();
 
             // Luodaan skapparit lista
             skapparit = new List<Skappari>();
             // Luodaan skappari            
             Skappari skappari1 = new Skappari();
             skapparit.Add(skappari1);
-            skappari1.LocationX = 1000; skappari1.LocationY = 480;
+            skappari1.LocationX = 620; skappari1.LocationY = 530;
             skappari1.SetLocation();
 
             // Luodaan Rynkkylista
@@ -129,20 +131,19 @@ namespace mage
             // Luodaan Tellu1
             Tellu tellu1 = new Tellu();
             tellut.Add(tellu1);
-            tellu1.LocationX = 300; tellu1.LocationY = 610;
+            tellu1.LocationX = 300; tellu1.LocationY = 650;
             tellu1.SetLocation();
 
             // Luodaan Tellu2
             Tellu tellu2 = new Tellu();
             tellut.Add(tellu2);
-            tellu2.LocationX = 600; tellu2.LocationY = 610;
+            tellu2.LocationX = 160; tellu2.LocationY = 610;
             tellu2.SetLocation();
 
             // Lisätään magehahmo ja muut oliot Canvakselle
             MyCanvas.Children.Add(magehahmo);
             //MAA
-            MyCanvas.Children.Add(maa1);
-            MyCanvas.Children.Add(maa2);
+            MyCanvas.Children.Add(maa1);           
             //MAAPALAT
             MyCanvas.Children.Add(mpala1);
             MyCanvas.Children.Add(mpala2);
@@ -157,6 +158,7 @@ namespace mage
             MyCanvas.Children.Add(rynkky1);
             //ISOT PALAT
             MyCanvas.Children.Add(isopala1);
+            MyCanvas.Children.Add(isopala2);
 
 
             // Key Listeners,   näppäimien kuuntelua, onko jokin painettuna vai ei?
@@ -200,7 +202,7 @@ namespace mage
                     //Käännetään magehahmo kun kävellään VASEMMALLE
                     ScaleTransform scaleLeft = new ScaleTransform();
                     scaleLeft.ScaleX = -1;
-                    scaleLeft.CenterX = 125;
+                    scaleLeft.CenterX = 30;
                     magehahmo.RenderTransform = scaleLeft;
                     break;
                 case VirtualKey.Right:
@@ -208,7 +210,7 @@ namespace mage
                     //Käännetään magehahmo kun kävellään OIKEALLE
                     ScaleTransform scaleRight = new ScaleTransform();
                     scaleRight.ScaleX = 1;
-                    scaleRight.CenterX = 125;
+                    scaleRight.CenterX = 30;
                     magehahmo.RenderTransform = scaleRight;
                     break;
             }
@@ -272,7 +274,7 @@ namespace mage
                 Rect FRect = new Rect(                                               // Tellun sijainti ja koko
                     maa.LocationX, maa.LocationY, maa.ActualWidth, maa.ActualHeight
                     );
-                // Does objects intersects, törmääkö objektit
+                // Törmääkö objektit
                 BRect.Intersect(FRect);
                 if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
                 {
@@ -287,7 +289,7 @@ namespace mage
                 }
                 else
                 {
-                    magehahmo.LocationY = magehahmo.LocationY + 10;
+                    magehahmo.LocationY = magehahmo.LocationY + 20;
                     break;
                 }
             }
@@ -384,7 +386,7 @@ namespace mage
                     MyCanvas.Children.Remove(rynkky);
                     // Poistetaan myös listasta tellu
                     rynkyt.Remove(rynkky);
-                    Frame.Navigate(typeof(Voitit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
+              //      Frame.Navigate(typeof(Voitit));  // Kun Rynkkyyn osutaan, siirrytään "Voitit"-sivulle
                     break;
                 }
 

@@ -25,9 +25,9 @@ namespace mage
         private DispatcherTimer timer;
 
         // Offset to show, eli mikä kohta Magen kuvasta näytetään suorakulmion sisällä
-        private int currentFrame = 0;
+        private int currentFrame = 6;
         private int direction = 1; // 1 or -1 Vaihtuuko frame "isommaksi" vai "pienemmäksi"
-        private int frameheight = 400;
+        private int frameheight = 96;
 
         // Nopeus
         private readonly double MaxSpeed = 10;      // Maxnopeus Magehahmolle
@@ -51,7 +51,7 @@ namespace mage
         public Magehahmo()
         {
             this.InitializeComponent();
-            Width = 250; Height = 400;
+            Width = 60; Height = 96;
             // Animate 
             timer = new DispatcherTimer();
             // 125ms,   Aikaväli päivittämiselle (fps)
@@ -109,7 +109,7 @@ namespace mage
             {
                 // Mage liikkuu ainoastaan ylöspäin LocationY = LocationY - speed;
                 // Magen liikutus sinikäyrällä
-                LocationY = Force;
+                LocationY = Force + 200;
                 LocationY = LocationY - Force;
                 Jumping = true;
                 /*  Angle = 45;

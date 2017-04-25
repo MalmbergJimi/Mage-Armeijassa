@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="100"
-    d:DesignWidth="140">
-    <Image Source="Assets/Maalaja.png"
-Width="150" Height="100"/>
+    d:DesignWidth="100">
+    <Image Source="Assets/lumipala.png"
+Width="100" Height="100"/>
 </UserControl>
