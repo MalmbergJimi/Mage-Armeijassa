@@ -46,5 +46,15 @@ namespace mage
         {
             Frame.Navigate(typeof(Etusivu));
         }
+
+        private void textBlock_SelectionChanged_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

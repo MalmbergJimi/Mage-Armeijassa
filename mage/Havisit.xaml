@@ -8,12 +8,20 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
+        <Image x:Name="image_havisit" Source="Assets/havisit.png" HorizontalAlignment="Left" Height="720"  VerticalAlignment="Top" Width="1280"/>
         <Button x:Name="alkuun"  Content="Yritä uudestaan" HorizontalAlignment="Left" Margin="980,52,0,0" VerticalAlignment="Top" Height="84" Width="233"
         Click="alkuun_Click"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="591,348,0,0" TextWrapping="Wrap" Text="HÄVISIT PELIN!" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="357,244,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="162" Width="391" Foreground="#FFF9F8F8" FontSize="22" TextAlignment="Center">
+            <Run/>
+            <LineBreak/>
+            <Run Text="Midäd helveddiä!11 :PPP"/>
+            <LineBreak/>
+            <Run Text="Hyppäsid gersantti Runtu Tuntu Tukassa Asti päälle :''DD"/>
+            <LineBreak/>
+            <Run Text="Ed sää migään sissi ole XDd:DD!!11"/>
+        </TextBlock>
         <Button x:Name="Valikkoon"  Content="Valikkoon" HorizontalAlignment="Left" Margin="72,52,0,0" VerticalAlignment="Top" Height="84" Width="233"
-            Click="Valikkoon_Click"/>
+            Click="Valikkoon_Click" />
 
     </Grid>
 </Page>

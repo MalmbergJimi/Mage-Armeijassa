@@ -8,7 +8,8 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="528,303,0,0" Height="128" Width="221" TextAlignment="Center">
+        <Image x:Name="image_voitit" Source="Assets/voitit_tausta.png" HorizontalAlignment="Left" Height="720"  VerticalAlignment="Top" Width="1280"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="532,224,0,0" Height="128" Width="221" TextAlignment="Center">
             <Run FontSize="36" Text="Hienoa! Voitit pelin!"/>
             <LineBreak/>
             <Run Text=""/>

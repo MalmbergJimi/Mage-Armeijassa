@@ -60,13 +60,13 @@ namespace mage
             // Vaihdetaan oletus StartUp mode
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.PreferredLaunchViewSize = new Size(1280, 720);
-            //disable debugger info
-            App.Current.DebugSettings.EnableFrameRateCounter = true;
+            //FPS Mittari pois
+            App.Current.DebugSettings.EnableFrameRateCounter = false;
 
             magehahmo = new Magehahmo
             {
                 LocationX = 0,     // Määritetään magehahmon aloitussijainti
-                LocationY = 220,
+                LocationY = 520,
                 Jumping = false
             };
             // MAAT LISTA
@@ -218,7 +218,7 @@ namespace mage
             timer.Start();
 
         }
-
+        //ladataan audio taustamusiikiksi
         private async void LoadAudio3()
         {
             StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
@@ -229,7 +229,7 @@ namespace mage
             mediaElement3.AutoPlay = true;
             mediaElement3.SetSource(stream, file.ContentType);
         }
-
+        //ladataan audio Skappariin törmäystä varten
         private async void LoadAudio2()
         {
             StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
@@ -242,7 +242,7 @@ namespace mage
         }
 
 
-        //ladataan audio kun törmäys on tapahtunut
+        //ladataan audio telluun törmäystä varten
         private async void LoadAudio()
         {
             StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
@@ -312,13 +312,12 @@ namespace mage
             // Collision, törmääkö mihinkään
             CheckCollision();
         }
-
         // BUTTON ETUSIVULLE SIIRTYMISEEN
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(Etusivu));         
-        }
-        
+            Frame.Navigate(typeof(Etusivu));
+            mediaElement3.Pause();  // Lopetetaan pelin taustamusiikki kun siirrytään etusivulle     
+        }        
         private void CheckCollision()
         {            
             // Käydään läpi TELLU-LISTA
@@ -342,7 +341,7 @@ namespace mage
                     tellut.Remove(tellu);
                     mediaElement.Play();
                     mediaElement3.Pause();
-                    Frame.Navigate(typeof(Havisit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
+                 //   Frame.Navigate(typeof(HavisitTellu));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
                     break;
                 }
             }
@@ -496,14 +495,11 @@ namespace mage
                     MyCanvas.Children.Remove(rynkky);
                     // Poistetaan myös listasta tellu
                     rynkyt.Remove(rynkky);
-              //      Frame.Navigate(typeof(Voitit));  // Kun Rynkkyyn osutaan, siirrytään "Voitit"-sivulle
+                    mediaElement3.Pause();
+                    Frame.Navigate(typeof(Voitit));  // Kun Rynkkyyn osutaan, siirrytään "Voitit"-sivulle
                     break;
                 }
-
             }
-
-
         }
-
     }
 }

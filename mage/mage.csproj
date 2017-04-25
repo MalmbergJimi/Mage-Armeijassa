@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\etusivu.png" />
+    <Content Include="Assets\havisit.png" />
     <Content Include="Assets\marssi.mp3" />
     <Content Include="Assets\lumipala.png" />
     <Content Include="Assets\lumipala_reuna.png" />
@@ -165,6 +166,7 @@
     <Content Include="Assets\tellu.png" />
     <Content Include="Assets\auto.png" />
     <Content Include="Assets\tellu.wav" />
+    <Content Include="Assets\voitit_tausta.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
