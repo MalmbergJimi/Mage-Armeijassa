@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.System;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -46,10 +47,16 @@ namespace mage
         // Luodaan ajastin timeri
         private DispatcherTimer timer;
 
+        //Ääni
+        private MediaElement mediaElement;
+        private MediaElement mediaElement2;
+        private MediaElement mediaElement3;
+
         public MainPage()
         {
             this.InitializeComponent();
 
+            
             // Vaihdetaan oletus StartUp mode
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.PreferredLaunchViewSize = new Size(1280, 720);
@@ -200,11 +207,51 @@ namespace mage
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;  // Onko näppäimi alhaalla
             Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp; //Onko näppäimiä "ylhäällä"
 
+            // ladataan ääni
+            LoadAudio();
+            LoadAudio2();
+            LoadAudio3();
             // Start game loop,     PELI LÄHTEE HETI KÄYNTIIN
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             timer.Tick += Timer_Tick;
             timer.Start();
+
+        }
+
+        private async void LoadAudio3()
+        {
+            StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file = await folder.GetFileAsync("marssi.mp3");
+            var stream = await file.OpenAsync(FileAccessMode.Read);
+
+            mediaElement3 = new MediaElement();      // Ladataan audio valmiiksi muistiin, mutta ei vielä soiteta
+            mediaElement3.AutoPlay = true;
+            mediaElement3.SetSource(stream, file.ContentType);
+        }
+
+        private async void LoadAudio2()
+        {
+            StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file = await folder.GetFileAsync("rage.mp3");
+            var stream = await file.OpenAsync(FileAccessMode.Read);
+
+            mediaElement2 = new MediaElement();      // Ladataan audio valmiiksi muistiin, mutta ei vielä soiteta
+            mediaElement2.AutoPlay = false;
+            mediaElement2.SetSource(stream, file.ContentType);
+        }
+
+
+        //ladataan audio kun törmäys on tapahtunut
+        private async void LoadAudio()
+        {
+            StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file = await folder.GetFileAsync("tellu.wav");
+            var stream = await file.OpenAsync(FileAccessMode.Read);
+
+            mediaElement = new MediaElement();      // Ladataan audio valmiiksi muistiin, mutta ei vielä soiteta
+            mediaElement.AutoPlay = false;
+            mediaElement.SetSource(stream, file.ContentType);
         }
 
         // KeyUp haistelu
@@ -293,7 +340,9 @@ namespace mage
                     MyCanvas.Children.Remove(tellu);
                     // Poistetaan myös listasta tellu
                     tellut.Remove(tellu);
-               //     Frame.Navigate(typeof(Havisit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
+                    mediaElement.Play();
+                    mediaElement3.Pause();
+                    Frame.Navigate(typeof(Havisit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
                     break;
                 }
             }
@@ -397,6 +446,9 @@ namespace mage
                     MyCanvas.Children.Remove(skappari);
                     // Poistetaan myös listasta skappari
                     skapparit.Remove(skappari);
+                    mediaElement2.Play();
+                    mediaElement3.Pause();
+                    Frame.Navigate(typeof(Havisit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
                     break;
                 }
             }
