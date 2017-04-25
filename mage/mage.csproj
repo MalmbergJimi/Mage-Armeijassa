@@ -95,6 +95,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Auto.xaml.cs">
+      <DependentUpon>Auto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Etusivu.xaml.cs">
       <DependentUpon>Etusivu.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,7 @@
     <Content Include="Assets\taustakuva.jpg" />
     <Content Include="Assets\taustakuva.png" />
     <Content Include="Assets\tellu.png" />
+    <Content Include="Assets\auto.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -171,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Auto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Etusivu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

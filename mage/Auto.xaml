@@ -1,14 +1,13 @@
 ﻿<UserControl
-    x:Class="mage.Skappari"
+    x:Class="mage.Auto"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:mage"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="105"
-    d:DesignWidth="87.5">
-
-    <Image Source="Assets/skappari.png"
-         Width="87.5" Height="105" />
+    d:DesignHeight="125"
+    d:DesignWidth="175">
+    <Image Source="Assets/auto.png"
+        Width="175" Height="125"/>
 </UserControl>

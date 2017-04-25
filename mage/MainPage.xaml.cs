@@ -33,6 +33,7 @@ namespace mage
         private List<Maapala> maapalat;
         private List<Skappari> skapparit;
         private List<Isomaapala> isotpalat;
+        private List<Auto> autot;
         //Luodaan Rynkky
         private List<Rynkky> rynkyt;
 
@@ -87,15 +88,19 @@ namespace mage
             maapalat.Add(mpala3);
             mpala3.LocationX = 200; mpala3.LocationY = 620;
             mpala3.SetLocation();
-            //Palat
+            //Pala4
             Maapala mpala4 = new Maapala();
             maapalat.Add(mpala4);
             mpala4.LocationX = 550; mpala4.LocationY = 620;
             mpala4.SetLocation();
+            //Pala5
+            Maapala mpala5 = new Maapala();
+            maapalat.Add(mpala5);
+            mpala5.LocationX = 930; mpala5.LocationY = 620;
+            mpala5.SetLocation();
 
             // LUODAAN ISO MAAPALA
             isotpalat = new List<Isomaapala>();
-
             //Isotpalat
             Isomaapala isopala1 = new Isomaapala();
             //Isopala1
@@ -109,21 +114,35 @@ namespace mage
             isopala2.LocationX = 450;
             isopala2.LocationY = 570;
             isopala2.SetLocation();
+            //Isopala3
+            Isomaapala isopala3 = new Isomaapala();
+            isotpalat.Add(isopala3);
+            isopala3.LocationX = 1060;
+            isopala3.LocationY = 570;
+            isopala3.SetLocation();
 
             // Luodaan skapparit lista
             skapparit = new List<Skappari>();
             // Luodaan skappari            
             Skappari skappari1 = new Skappari();
             skapparit.Add(skappari1);
-            skappari1.LocationX = 620; skappari1.LocationY = 530;
+            skappari1.LocationX = 610; skappari1.LocationY = 570;
             skappari1.SetLocation();
+
+            //Luodaan autot lista
+            autot = new List<Auto>();
+            //Luodaan autot
+            Auto auto1 = new Auto();
+            auto1.LocationX = 670; auto1.LocationY = 545;
+            auto1.SetLocation();
+            autot.Add(auto1);
 
             // Luodaan Rynkkylista
             rynkyt = new List<Rynkky>();
             // Luodaan Rynkky1
             Rynkky rynkky1 = new Rynkky();
             rynkyt.Add(rynkky1);
-            rynkky1.LocationX = 800; rynkky1.LocationY = 100;
+            rynkky1.LocationX = 1160; rynkky1.LocationY = 640;
             rynkky1.SetLocation();
 
             // alustetaan tellulista
@@ -133,12 +152,21 @@ namespace mage
             tellut.Add(tellu1);
             tellu1.LocationX = 300; tellu1.LocationY = 650;
             tellu1.SetLocation();
-
             // Luodaan Tellu2
             Tellu tellu2 = new Tellu();
             tellut.Add(tellu2);
             tellu2.LocationX = 160; tellu2.LocationY = 610;
             tellu2.SetLocation();
+            // Luodaan Tellu3
+            Tellu tellu3 = new Tellu();
+            tellut.Add(tellu3);
+            tellu3.LocationX = 860; tellu3.LocationY = 650;
+            tellu3.SetLocation();
+            // Luodaan Tellu4
+            Tellu tellu4 = new Tellu();
+            tellut.Add(tellu4);
+            tellu4.LocationX = 1010; tellu4.LocationY = 650;
+            tellu4.SetLocation();
 
             // Lisätään magehahmo ja muut oliot Canvakselle
             MyCanvas.Children.Add(magehahmo);
@@ -149,16 +177,23 @@ namespace mage
             MyCanvas.Children.Add(mpala2);
             MyCanvas.Children.Add(mpala3);
             MyCanvas.Children.Add(mpala4);
+            MyCanvas.Children.Add(mpala5);
             //TELLUT
             MyCanvas.Children.Add(tellu1);
             MyCanvas.Children.Add(tellu2);
+            MyCanvas.Children.Add(tellu3);
+            MyCanvas.Children.Add(tellu4);
+            //Autot
+            MyCanvas.Children.Add(auto1);
             //SKAPPARIT
             MyCanvas.Children.Add(skappari1);
+            
             //RYNKKY
             MyCanvas.Children.Add(rynkky1);
             //ISOT PALAT
             MyCanvas.Children.Add(isopala1);
             MyCanvas.Children.Add(isopala2);
+            MyCanvas.Children.Add(isopala3);
 
 
             // Key Listeners,   näppäimien kuuntelua, onko jokin painettuna vai ei?
@@ -238,9 +273,7 @@ namespace mage
         }
         
         private void CheckCollision()
-        {
-
-            
+        {            
             // Käydään läpi TELLU-LISTA
             foreach (Tellu tellu in tellut)
             {
@@ -320,8 +353,7 @@ namespace mage
                     break;
                 }
             }
-            //Käydään läpi Isotmaapalat lista
-            
+            //Käydään läpi Isotmaapalat lista            
             foreach(Isomaapala isopala in isotpalat)
             {
                 Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
@@ -368,6 +400,32 @@ namespace mage
                     break;
                 }
             }
+            // Käydään läpi AUTOT-lista
+            foreach (Auto auto in autot)
+            {
+                // Get Rects, katsotaan osuuko mikään Auto magehahmoon
+                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
+                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                    );
+                Rect FRect = new Rect(                                               // Auton sijainti ja koko
+                    auto.LocationX, auto.LocationY, auto.ActualWidth, auto.ActualHeight
+                    );
+                // Does objects intersects, törmääkö objektit
+                BRect.Intersect(FRect);
+                if (!BRect.IsEmpty)
+                {
+                    // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
+                    magehahmo.Jumping = false;
+                    Debug.WriteLine(BRect);
+                    magehahmo.LocationY = 720 - auto.Height - magehahmo.Height - 50;
+                    // magehahmo.LocationY = BRect.Y - magehahmo.Height + 20;
+                    //magehahmo.LocationX = BRect.X;
+                    magehahmo.SetLocation();
+                    magehahmo.Jumping = false;
+                    break;
+                }
+            }
+
             // Käydään läpi RYNKYT-lista
             foreach (Rynkky rynkky in rynkyt)
             {

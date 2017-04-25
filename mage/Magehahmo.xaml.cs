@@ -95,9 +95,9 @@ namespace mage
             if (speed > MaxSpeed) speed = MaxSpeed;
             // Uusi sijainti
             LocationX = LocationX + speed;
-            if (LocationX >= 1150) // ESTETÄÄN Magehahmoa poistumasta ruudusta
+            if (LocationX >= 1250) // ESTETÄÄN Magehahmoa poistumasta ruudusta
             {
-                LocationX = 1120;
+                LocationX = 1245;
             }
             SetLocation();
         }

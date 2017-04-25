@@ -17,16 +17,17 @@ using Windows.UI.Xaml.Navigation;
 
 namespace mage
 {
-    public sealed partial class Skappari : UserControl
+    public sealed partial class Auto : UserControl
     {
-        public double LocationX { get; set; }   // Skapparilla sijainti X
-        public double LocationY { get; set; } // Skapparilla sijainti Y
-        public Skappari()
+        public double LocationX { get; set; }
+        public double LocationY { get; set; }
+        public Auto()
         {
             this.InitializeComponent();
-            Width = 87.5; Height = 105;
+            Width = 175; Height = 125;
         }
-
+       
+       
         public void SetLocation()
         {
             SetValue(Canvas.LeftProperty, LocationX);
