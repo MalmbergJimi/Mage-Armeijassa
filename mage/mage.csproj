@@ -107,6 +107,9 @@
     <Compile Include="Havisit_tellu.xaml.cs">
       <DependentUpon>Havisit_tellu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Intro.xaml.cs">
+      <DependentUpon>Intro.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Isomaapala.xaml.cs">
       <DependentUpon>Isomaapala.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,7 @@
     <Content Include="Assets\fail-trombone-01.wav" />
     <Content Include="Assets\havisit.png" />
     <Content Include="Assets\havisit_tellu.png" />
+    <Content Include="Assets\mage_armeijassa.mp4" />
     <Content Include="Assets\marssi.mp3" />
     <Content Include="Assets\lumipala.png" />
     <Content Include="Assets\lumipala_reuna.png" />
@@ -164,6 +168,7 @@
     <Content Include="Assets\ohjeet.png" />
     <Content Include="Assets\Pommi.mp3" />
     <Content Include="Assets\rage.mp3" />
+    <Content Include="Assets\rage.wav" />
     <Content Include="Assets\rynkky.png" />
     <Content Include="Assets\skappari.png" />
     <Content Include="Assets\taustakuva.png" />
@@ -200,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Havisit_tellu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Intro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

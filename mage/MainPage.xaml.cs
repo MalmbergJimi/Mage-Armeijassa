@@ -260,7 +260,7 @@ namespace mage
         private async void LoadAudio2()
         {
             StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
-            StorageFile file = await folder.GetFileAsync("rage.mp3");
+            StorageFile file = await folder.GetFileAsync("rage.wav");
             var stream = await file.OpenAsync(FileAccessMode.Read);
 
             mediaElement2 = new MediaElement();      // Ladataan audio valmiiksi muistiin, mutta ei vielä soiteta
