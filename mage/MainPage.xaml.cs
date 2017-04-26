@@ -36,8 +36,10 @@ namespace mage
         private List<Isomaapala> isotpalat;
         private List<Auto> autot;
         private List<Rynkky> rynkyt;
+        private List<Kivi> kivet;
 
-
+        //Rynkkylöydetty
+        private bool rynkkyloydetty = false;
         // Laitetaan muuttujiin mitkä näppäimet ovat painettuina tai päästettyinä
         private bool UpPressed;
         private bool LeftPressed;
@@ -71,6 +73,14 @@ namespace mage
                 LocationY = 520,
                 Jumping = false                
             };
+
+            //Kivi lista
+            kivet = new List<Kivi>();
+            Kivi kivi = new Kivi();
+            kivet.Add(kivi);
+            kivi.LocationX = 10; kivi.LocationY = 620;
+            kivi.SetLocation();
+
             // MAAT LISTA
             maat = new List<Maata>();
             // Luodaan maa1
@@ -178,6 +188,9 @@ namespace mage
             tellu4.SetLocation();
 
             // Lisätään magehahmo ja muut oliot Canvakselle
+            //Kivi
+            MyCanvas.Children.Add(kivi);
+            //Mage
             MyCanvas.Children.Add(magehahmo);
             //MAA
             MyCanvas.Children.Add(maa1);           
@@ -202,6 +215,7 @@ namespace mage
             MyCanvas.Children.Add(isopala1);
             MyCanvas.Children.Add(isopala2);
             MyCanvas.Children.Add(isopala3);
+            
 
             // Key Listeners,   näppäimien kuuntelua, onko jokin painettuna vai ei?
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;  // Onko näppäimi alhaalla
@@ -513,16 +527,42 @@ namespace mage
                 BRect.Intersect(FRect);
                 if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
                 {
+                    rynkkyloydetty = true;
                     // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
                     MyCanvas.Children.Remove(rynkky);
                     // Poistetaan myös listasta tellu
-                    rynkyt.Remove(rynkky);
-                    mediaElement3.Pause();
-                    mediaElement5.Play();
-                    timer.Stop();
-                    Frame.Navigate(typeof(Voitit));  // Kun Rynkkyyn osutaan, siirrytään "Voitit"-sivulle
+                    //rynkyt.Remove(rynkky);
+                    //mediaElement3.Pause();
+                    //mediaElement5.Play();
+                    //timer.Stop();
+                    //Frame.Navigate(typeof(Voitit));  // Kun Rynkkyyn osutaan, siirrytään "Voitit"-sivulle
                     break;
                 }
+            }
+            foreach (Kivi kivi in kivet)
+            {
+                // Get Rects, katsotaan osuuko mikään magehahmoon
+                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
+                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                    );
+                Rect FRect = new Rect(                                               // Maan sijainti ja koko
+                    kivi.LocationX, kivi.LocationY, kivi.ActualWidth, kivi.ActualHeight
+                    );
+                // Törmääkö objektit
+                BRect.Intersect(FRect);
+                if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
+                {
+                    if (rynkkyloydetty == true){
+
+
+                        mediaElement3.Pause();
+                        mediaElement5.Play();
+                        timer.Stop();
+                        Frame.Navigate(typeof(Voitit));  // Kun Rynkkyyn osutaan, siirrytään "Voitit"-sivulle
+                    }
+                    break;
+                }
+                
             }
         }
     }

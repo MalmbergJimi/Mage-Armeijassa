@@ -113,6 +113,9 @@
     <Compile Include="Isomaapala.xaml.cs">
       <DependentUpon>Isomaapala.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Kivi.xaml.cs">
+      <DependentUpon>Kivi.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Maapala.xaml.cs">
       <DependentUpon>Maapala.xaml</DependentUpon>
     </Compile>
@@ -154,6 +157,7 @@
     <Content Include="Assets\fail-trombone-01.wav" />
     <Content Include="Assets\havisit.png" />
     <Content Include="Assets\havisit_tellu.png" />
+    <Content Include="Assets\kivi.png" />
     <Content Include="Assets\mage_armeijassa.mp4" />
     <Content Include="Assets\marssi.mp3" />
     <Content Include="Assets\lumipala.png" />
@@ -213,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Isomaapala.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Kivi.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
