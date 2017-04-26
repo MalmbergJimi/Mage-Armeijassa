@@ -148,6 +148,7 @@
   <ItemGroup>
     <Content Include="Assets\etusivu.png" />
     <Content Include="Assets\etusivu_2.png" />
+    <Content Include="Assets\fail-trombone-01.wav" />
     <Content Include="Assets\havisit.png" />
     <Content Include="Assets\havisit_tellu.png" />
     <Content Include="Assets\marssi.mp3" />
@@ -161,6 +162,7 @@
     <Content Include="Assets\maget_animaatioon_pienempi2.png" />
     <Content Include="Assets\maget_animaatioon_pienempi3.png" />
     <Content Include="Assets\ohjeet.png" />
+    <Content Include="Assets\PoikaTetsaa.mp3" />
     <Content Include="Assets\Pommi.mp3" />
     <Content Include="Assets\rage.mp3" />
     <Content Include="Assets\rynkky.png" />

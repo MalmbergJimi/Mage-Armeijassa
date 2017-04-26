@@ -49,8 +49,10 @@ namespace mage
         //Ääni
         private MediaElement mediaElement;
         private MediaElement mediaElement2;
-        private MediaElement mediaElement3; // Taustamusiikki
+        private MediaElement mediaElement3;
+        private MediaElement mediaElement4;
 
+        // Taustamusiikki
         public MainPage()
         {
             this.InitializeComponent();
@@ -208,12 +210,28 @@ namespace mage
             LoadAudio();
             LoadAudio2();
             LoadAudio3();
+            LoadAudio4();
             // Start game loop,     PELI LÄHTEE HETI KÄYNTIIN
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
+
+
+
+        //ladataan audio epäonnistumismusiikiksi
+        private async void LoadAudio4()
+        {
+            StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file = await folder.GetFileAsync("fail-trombone-01.wav");
+            var stream = await file.OpenAsync(FileAccessMode.Read);
+            
+            mediaElement4 = new MediaElement();      // Ladataan audio valmiiksi muistiin, mutta ei vielä soiteta
+            mediaElement4.AutoPlay = false;
+            mediaElement4.SetSource(stream, file.ContentType);
+        }
+
         //ladataan audio taustamusiikiksi
         private async void LoadAudio3()
         {
@@ -335,6 +353,7 @@ namespace mage
                     MyCanvas.Children.Remove(tellu);
                     // Poistetaan myös listasta tellu
                     tellut.Remove(tellu);
+                    mediaElement4.Play();
                     mediaElement.Play();
                     mediaElement3.Pause();
                     timer.Stop();
@@ -434,6 +453,7 @@ namespace mage
                     MyCanvas.Children.Remove(skappari);
                     // Poistetaan myös listasta skappari
                     skapparit.Remove(skappari);
+                    mediaElement4.Play();
                     mediaElement2.Play();
                     mediaElement3.Pause();
                     timer.Stop();
