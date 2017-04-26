@@ -28,11 +28,7 @@ namespace mage
         {
             this.InitializeComponent();
         }
-
         
-        
-
-
         // SIIRRYTÄÄN AloitaButtonia painamalla MainPagelle
         private void AloitaButton_Click(object sender, RoutedEventArgs e)
         {

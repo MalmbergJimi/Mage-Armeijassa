@@ -162,7 +162,6 @@
     <Content Include="Assets\maget_animaatioon_pienempi2.png" />
     <Content Include="Assets\maget_animaatioon_pienempi3.png" />
     <Content Include="Assets\ohjeet.png" />
-    <Content Include="Assets\PoikaTetsaa.mp3" />
     <Content Include="Assets\Pommi.mp3" />
     <Content Include="Assets\rage.mp3" />
     <Content Include="Assets\rynkky.png" />
@@ -172,6 +171,8 @@
     <Content Include="Assets\auto.png" />
     <Content Include="Assets\tellu.wav" />
     <Content Include="Assets\voitit_tausta.png" />
+    <Content Include="Assets\voittolaulu.mp3" />
+    <Content Include="Assets\winwin.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

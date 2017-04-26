@@ -30,6 +30,7 @@ namespace mage
         private void Valikkoon_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(Etusivu));
+            
         }
     }
 }

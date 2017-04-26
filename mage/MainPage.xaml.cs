@@ -51,6 +51,7 @@ namespace mage
         private MediaElement mediaElement2;
         private MediaElement mediaElement3;
         private MediaElement mediaElement4;
+        private MediaElement mediaElement5;
 
         // Taustamusiikki
         public MainPage()
@@ -206,11 +207,12 @@ namespace mage
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;  // Onko näppäimi alhaalla
             Window.Current.CoreWindow.KeyUp += CoreWindow_KeyUp; //Onko näppäimiä "ylhäällä"
 
-            // ladataan ääni
+            // ladataan äänet
             LoadAudio();
             LoadAudio2();
             LoadAudio3();
             LoadAudio4();
+            LoadAudio5();
             // Start game loop,     PELI LÄHTEE HETI KÄYNTIIN
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
@@ -219,8 +221,19 @@ namespace mage
         }
 
 
+        //ladataan audio VOITTO-musiikiksi
+        private async void LoadAudio5()
+        {
+            StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file = await folder.GetFileAsync("winwin.mp3");
+            var stream = await file.OpenAsync(FileAccessMode.Read);
 
-        //ladataan audio epäonnistumismusiikiksi
+            mediaElement5 = new MediaElement();      // Ladataan audio valmiiksi muistiin, mutta ei vielä soiteta
+            mediaElement5.AutoPlay = false;
+            mediaElement5.SetSource(stream, file.ContentType);
+        }
+
+        //ladataan audio EPÄONNISTUMIS-musiikiksi
         private async void LoadAudio4()
         {
             StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
@@ -232,18 +245,18 @@ namespace mage
             mediaElement4.SetSource(stream, file.ContentType);
         }
 
-        //ladataan audio taustamusiikiksi
+        //ladataan audio TAUSTA-musiikiksi
         private async void LoadAudio3()
         {
             StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
             StorageFile file = await folder.GetFileAsync("marssi.mp3");
             var stream = await file.OpenAsync(FileAccessMode.Read);
 
-            mediaElement3 = new MediaElement();      // Ladataan audio valmiiksi muistiin, mutta ei vielä soiteta
-            mediaElement3.AutoPlay = true;
+            mediaElement3 = new MediaElement();      // Ladataan audio
+            mediaElement3.AutoPlay = true;          // Taustamusiikki lähtee heti soimaan
             mediaElement3.SetSource(stream, file.ContentType);
         }
-        //ladataan audio Skappariin törmäystä varten
+        //ladataan audio SKAPPARIIN törmäystä varten
         private async void LoadAudio2()
         {
             StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
@@ -255,8 +268,7 @@ namespace mage
             mediaElement2.SetSource(stream, file.ContentType);
         }
 
-
-        //ladataan audio telluun törmäystä varten
+        //ladataan audio TELLUUN törmäystä varten
         private async void LoadAudio()
         {
             StorageFolder folder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
@@ -313,7 +325,7 @@ namespace mage
         }
         //Peli luuppi
         private void Timer_Tick(object sender, object e)
-        {
+        {           
             // Liikutetaan magehahmoa jos painettu näppäimiä 
             if (LeftPressed) magehahmo.MoveLeft();
             if (RightPressed) magehahmo.MoveRight();
@@ -506,6 +518,7 @@ namespace mage
                     // Poistetaan myös listasta tellu
                     rynkyt.Remove(rynkky);
                     mediaElement3.Pause();
+                    mediaElement5.Play();
                     timer.Stop();
                     Frame.Navigate(typeof(Voitit));  // Kun Rynkkyyn osutaan, siirrytään "Voitit"-sivulle
                     break;
