@@ -28,29 +28,28 @@ namespace mage
     {
         // Luodaan magehahmo
         private Magehahmo magehahmo;
-        // Luodaan tellut
+        // Luodaan Listat joihin oliot laitetaan
         private List<Tellu> tellut;
         private List<Maata> maat;
         private List<Maapala> maapalat;
         private List<Skappari> skapparit;
         private List<Isomaapala> isotpalat;
         private List<Auto> autot;
-        //Luodaan Rynkky
         private List<Rynkky> rynkyt;
 
 
-        // Tutkitaan mitkä näppäimet ovat painettuina tai päästettyinä
+        // Laitetaan muuttujiin mitkä näppäimet ovat painettuina tai päästettyinä
         private bool UpPressed;
         private bool LeftPressed;
         private bool RightPressed;
 
-        // Luodaan ajastin timeri
+        // Luodaan ajastin
         private DispatcherTimer timer;
 
         //Ääni
         private MediaElement mediaElement;
         private MediaElement mediaElement2;
-        private MediaElement mediaElement3;
+        private MediaElement mediaElement3; // Taustamusiikki
 
         public MainPage()
         {
@@ -67,7 +66,7 @@ namespace mage
             {
                 LocationX = 0,     // Määritetään magehahmon aloitussijainti
                 LocationY = 520,
-                Jumping = false
+                Jumping = false                
             };
             // MAAT LISTA
             maat = new List<Maata>();
@@ -194,14 +193,12 @@ namespace mage
             MyCanvas.Children.Add(auto1);
             //SKAPPARIT
             MyCanvas.Children.Add(skappari1);
-            
             //RYNKKY
             MyCanvas.Children.Add(rynkky1);
             //ISOT PALAT
             MyCanvas.Children.Add(isopala1);
             MyCanvas.Children.Add(isopala2);
             MyCanvas.Children.Add(isopala3);
-
 
             // Key Listeners,   näppäimien kuuntelua, onko jokin painettuna vai ei?
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;  // Onko näppäimi alhaalla
@@ -216,7 +213,6 @@ namespace mage
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             timer.Tick += Timer_Tick;
             timer.Start();
-
         }
         //ladataan audio taustamusiikiksi
         private async void LoadAudio3()
@@ -330,7 +326,7 @@ namespace mage
                 Rect FRect = new Rect(                                               // Tellun sijainti ja koko
                     tellu.LocationX, tellu.LocationY, tellu.ActualWidth, tellu.ActualHeight
                     );
-                // Does objects intersects, törmääkö objektit
+                // Törmääkö objektit
                 BRect.Intersect(FRect);
                 if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
                 {
@@ -341,31 +337,26 @@ namespace mage
                     tellut.Remove(tellu);
                     mediaElement.Play();
                     mediaElement3.Pause();
-                 //   Frame.Navigate(typeof(HavisitTellu));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
+                    timer.Stop();
+                    Frame.Navigate(typeof(Havisit_tellu));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle                    
                     break;
                 }
             }
             // Käydään läpi MAAT-lista
             foreach (Maata maa in maat)
             {
-                // Get Rects, katsotaan osuuko mikään tellulistan telluista magehahmoon
+                // Get Rects, katsotaan osuuko mikään magehahmoon
                 Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
                     magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
                     );
-                Rect FRect = new Rect(                                               // Tellun sijainti ja koko
+                Rect FRect = new Rect(                                               // Maan sijainti ja koko
                     maa.LocationX, maa.LocationY, maa.ActualWidth, maa.ActualHeight
                     );
                 // Törmääkö objektit
                 BRect.Intersect(FRect);
                 if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
                 {
-                    magehahmo.Jumping = false;
-                    // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
-                    // Poistetaan tellu Canvakselta
-                    // magehahmo.LocationY = maa.LocationY;
-                    // MyCanvas.Children.Remove(maa);
-                    // Poistetaan myös listasta maa
-                    // maat.Remove(maa);
+                    magehahmo.Jumping = false;                    
                     break;
                 }
                 else
@@ -389,12 +380,10 @@ namespace mage
                 BRect.Intersect(FRect);
                 if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
                 {
-                    // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
-                    magehahmo.Jumping = false;
+                    // Collision! Alue ei ole tyhjä
+                    magehahmo.Jumping = false; 
                     Debug.WriteLine(BRect);
                     magehahmo.LocationY = 720 - mpala.Height - magehahmo.Height - 50;
-                   // magehahmo.LocationY = BRect.Y - magehahmo.Height + 20;
-                    //magehahmo.LocationX = BRect.X;
                     magehahmo.SetLocation();
                     // maapalat.Remove(mpala);
                     magehahmo.Jumping = false;
@@ -447,6 +436,7 @@ namespace mage
                     skapparit.Remove(skappari);
                     mediaElement2.Play();
                     mediaElement3.Pause();
+                    timer.Stop();
                     Frame.Navigate(typeof(Havisit));  // Kun Telluun osutaan, siirrytään "Havisit"-sivulle
                     break;
                 }
@@ -496,6 +486,7 @@ namespace mage
                     // Poistetaan myös listasta tellu
                     rynkyt.Remove(rynkky);
                     mediaElement3.Pause();
+                    timer.Stop();
                     Frame.Navigate(typeof(Voitit));  // Kun Rynkkyyn osutaan, siirrytään "Voitit"-sivulle
                     break;
                 }

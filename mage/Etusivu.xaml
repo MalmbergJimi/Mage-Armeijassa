@@ -8,14 +8,14 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Image x:Name="image_etusivu" Source="Assets/etusivu.png" HorizontalAlignment="Left" Height="720" Margin="88,0,-88,0" VerticalAlignment="Top" Width="1280"/>
+        <Image x:Name="image_etusivu" Source="Assets/etusivu.png" HorizontalAlignment="Left" Height="720" VerticalAlignment="Top" Width="1280"/>
         <Button x:Name="AloitaButton" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100" FontWeight="Black"
-                Click="AloitaButton_Click" Margin="444.4,350,426.556,227" Height="143" Width="409.044" RenderTransformOrigin="0.513,-0.172" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                Click="AloitaButton_Click" Margin="445.069,297.75,442.072,285.5" Height="136.75" Width="392.859" RenderTransformOrigin="0.513,-0.172" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Button.RenderTransform>
                 <CompositeTransform SkewX="-0.413" TranslateX="0.256"/>
             </Button.RenderTransform>
         </Button>
         <Button x:Name="OhjeetButton" Content="" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="100" FontWeight="Black"
-Click="OhjeetButton_Click" Margin="506,539,496,86" Height="95" Width="278"/>
+Click="OhjeetButton_Click" Margin="495,554,491,82" Height="84" Width="294"/>
     </Grid>
 </Page>
