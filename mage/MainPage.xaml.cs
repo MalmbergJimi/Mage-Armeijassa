@@ -78,7 +78,7 @@ namespace mage
             kivet = new List<Kivi>();
             Kivi kivi = new Kivi();
             kivet.Add(kivi);
-            kivi.LocationX = 10; kivi.LocationY = 620;
+            kivi.LocationX = 0; kivi.LocationY = 650;
             kivi.SetLocation();
 
             // MAAT LISTA
@@ -344,9 +344,7 @@ namespace mage
             if (LeftPressed) magehahmo.MoveLeft();
             if (RightPressed) magehahmo.MoveRight();
             if (UpPressed) magehahmo.Jump();
-            /*
-            if (UpPressed && !magehahmo.Jumping) magehahmo.Jump();
-            */
+
             // magehahmon paikka Canvaksella päivitetään
             magehahmo.SetLocation();
             // Collision, törmääkö mihinkään
@@ -364,17 +362,16 @@ namespace mage
             foreach (Tellu tellu in tellut)
             {
                 // Get Rects, katsotaan osuuko mikään tellulistan telluista magehahmoon
-                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
-                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                Rect BRect = new Rect(                                               
+                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight // magehahmon sijainti ja koko
                     );
-                Rect FRect = new Rect(                                               // Tellun sijainti ja koko
-                    tellu.LocationX, tellu.LocationY, tellu.ActualWidth, tellu.ActualHeight
+                Rect FRect = new Rect(                                              
+                    tellu.LocationX, tellu.LocationY, tellu.ActualWidth, tellu.ActualHeight // Tellun sijainti ja koko
                     );
                 // Törmääkö objektit
                 BRect.Intersect(FRect);
                 if (!BRect.IsEmpty) // Jos palautettu arvo EI OLE TYHJÄ
                 {
-                    Debug.WriteLine("HIT");
                     // Poistetaan tellu Canvakselta
                     MyCanvas.Children.Remove(tellu);
                     // Poistetaan myös listasta tellu
@@ -391,11 +388,11 @@ namespace mage
             foreach (Maata maa in maat)
             {
                 // Get Rects, katsotaan osuuko mikään magehahmoon
-                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
-                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                Rect BRect = new Rect(                                              
+                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight // magehahmon sijainti ja koko
                     );
-                Rect FRect = new Rect(                                               // Maan sijainti ja koko
-                    maa.LocationX, maa.LocationY, maa.ActualWidth, maa.ActualHeight
+                Rect FRect = new Rect(                                               
+                    maa.LocationX, maa.LocationY, maa.ActualWidth, maa.ActualHeight // Maan sijainti ja koko
                     );
                 // Törmääkö objektit
                 BRect.Intersect(FRect);
@@ -414,11 +411,11 @@ namespace mage
             foreach (Maapala mpala in maapalat)
             {
                 // Get Rects, katsotaan osuuko mikään Maapalat-listasta magehahmoon
-                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
-                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                Rect BRect = new Rect(                                              
+                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight // magehahmon sijainti ja koko
                     );
-                Rect FRect = new Rect(                                               // Maapalan sijainti ja koko
-                    mpala.LocationX, mpala.LocationY, mpala.ActualWidth, mpala.ActualHeight
+                Rect FRect = new Rect(                                               
+                    mpala.LocationX, mpala.LocationY, mpala.ActualWidth, mpala.ActualHeight // Maapalan sijainti ja koko
                     );
                 // Ttörmääkö objektit
                 
@@ -427,7 +424,6 @@ namespace mage
                 {
                     // Collision! Alue ei ole tyhjä
                     magehahmo.Jumping = false; 
-                    Debug.WriteLine(BRect);
                     magehahmo.LocationY = 720 - mpala.Height - magehahmo.Height - 50;
                     magehahmo.SetLocation();
                     // maapalat.Remove(mpala);
@@ -452,10 +448,7 @@ namespace mage
                     magehahmo.Jumping = false;
                     Debug.WriteLine(BRect);
                     magehahmo.LocationY = 720 - isopala.Height - magehahmo.Height - 50;
-                    // magehahmo.LocationY = BRect.Y - magehahmo.Height + 20;
-                    //magehahmo.LocationX = BRect.X;
                     magehahmo.SetLocation();
-                    // maapalat.Remove(mpala);
                     magehahmo.Jumping = false;
                     break;
                 }
@@ -491,11 +484,11 @@ namespace mage
             foreach (Auto auto in autot)
             {
                 // Get Rects, katsotaan osuuko mikään Auto magehahmoon
-                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
-                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                Rect BRect = new Rect(                                               
+                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight // magehahmon sijainti ja koko
                     );
-                Rect FRect = new Rect(                                               // Auton sijainti ja koko
-                    auto.LocationX, auto.LocationY, auto.ActualWidth, auto.ActualHeight
+                Rect FRect = new Rect(                                               
+                    auto.LocationX, auto.LocationY, auto.ActualWidth, auto.ActualHeight // Auton sijainti ja koko
                     );
                 // Does objects intersects, törmääkö objektit
                 BRect.Intersect(FRect);
@@ -530,23 +523,17 @@ namespace mage
                     rynkkyloydetty = true;
                     // Collision! Area isn't empty, törmäys - alue ei ole tyhjä
                     MyCanvas.Children.Remove(rynkky);
-                    // Poistetaan myös listasta tellu
-                    //rynkyt.Remove(rynkky);
-                    //mediaElement3.Pause();
-                    //mediaElement5.Play();
-                    //timer.Stop();
-                    //Frame.Navigate(typeof(Voitit));  // Kun Rynkkyyn osutaan, siirrytään "Voitit"-sivulle
                     break;
                 }
             }
             foreach (Kivi kivi in kivet)
             {
                 // Get Rects, katsotaan osuuko mikään magehahmoon
-                Rect BRect = new Rect(                                               // magehahmon sijainti ja koko
-                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight
+                Rect BRect = new Rect(                                               
+                    magehahmo.LocationX, magehahmo.LocationY, magehahmo.ActualWidth, magehahmo.ActualHeight // magehahmon sijainti ja koko
                     );
-                Rect FRect = new Rect(                                               // Maan sijainti ja koko
-                    kivi.LocationX, kivi.LocationY, kivi.ActualWidth, kivi.ActualHeight
+                Rect FRect = new Rect(                                               
+                    kivi.LocationX, kivi.LocationY, kivi.ActualWidth, kivi.ActualHeight // Kiven sijainti ja koko
                     );
                 // Törmääkö objektit
                 BRect.Intersect(FRect);
@@ -558,7 +545,7 @@ namespace mage
                         mediaElement3.Pause();
                         mediaElement5.Play();
                         timer.Stop();
-                        Frame.Navigate(typeof(Voitit));  // Kun Rynkkyyn osutaan, siirrytään "Voitit"-sivulle
+                        Frame.Navigate(typeof(Voitit));  // Kun Kiveen osutaan, siirrytään "Voitit"-sivulle
                     }
                     break;
                 }
